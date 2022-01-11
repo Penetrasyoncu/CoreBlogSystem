@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,5 +19,7 @@ namespace DataAccessLayer.Abstract
         void Update(T t);
         List<T> GetListAll();
         T GetByID(int id);
+        //BlogDetails İçin Bloga göre listeleme yapmak için bu metodu tanımlıyoruz. Şartlı bir sorgu yapmak için yaptık
+        List<T> GetListAll(Expression<Func<T, bool>> filter);
     }
 }

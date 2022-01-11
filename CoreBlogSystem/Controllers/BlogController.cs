@@ -13,9 +13,11 @@ namespace CoreBlogSystem.Controllers
             return View(values);
         }
 
-        public IActionResult BlogDetails(int id)
+        public IActionResult BlogReadAll(int id)
         {
-            return View();
+            //Dışarıdan Bir ID değişkeni alan bir Action Oluşturduk
+            var values = bm.GetBlogByID(id);
+            return View(values);
         }
     }
 }
