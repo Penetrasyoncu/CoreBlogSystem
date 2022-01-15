@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class Context: DbContext
+    public class Context : DbContext
     {
         /*Burası Veritabanına bağlandığımız alan. Aşağıdaki bağlantı cümlesi ile veritabanı oluşturuyor ya da bağlanıyoruz*/
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,9 +22,11 @@ namespace DataAccessLayer.Concrete
 
         public DbSet<About> Abouts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Category> Categories{ get; set; }
-        public DbSet<Comment> Comments{ get; set; }
-        public DbSet<Contact> Contacts{ get; set; }
-        public DbSet<Writer> Writers{ get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Writer> Writers { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<County> Counties { get; set; }
     }
 }
