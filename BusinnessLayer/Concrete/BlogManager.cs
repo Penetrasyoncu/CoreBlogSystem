@@ -52,5 +52,11 @@ namespace BusinnessLayer.Concrete
         {
             return _blogDal.GetListAll();
         }
+
+        public List<Blog> GetBlogListByWriter(int id)
+        {
+            //Burası da Yazarın Diğer Yazıları Alanı. Yazar ID' sine göre yazıları getiriyoruz
+            return _blogDal.GetListAll(x=>x.WriterID == id);
+        }
     }
 }

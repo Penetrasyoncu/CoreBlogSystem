@@ -1,12 +1,8 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 
 <head>
-    <title>@ViewBag.Title | Kısmi Zamanlı Blogcu</title>
+    <title>@ViewData["Title"] | Kısmi Zamanlı Blogcu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="keywords" content="Teknoloji ve Gündemde olan konuları en hızlı şekilde paylamak" />
@@ -26,7 +22,7 @@
     <link href="~/CoreBlogTemplate/css/style.css" rel='stylesheet' type='text/css' />
     <link href="~/CoreBlogTemplate/css/fontawesome-all.css" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet">
-  
+
 </head>
 
 <body>
@@ -111,6 +107,9 @@
     <!--/ start-smoth-scrolling -->
     <script src="~/CoreBlogTemplate/js/move-top.js"></script>
     <script src="~/CoreBlogTemplate/js/easing.js"></script>
+    <script src="~/js/sweetalert.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
     <script>
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -137,14 +136,50 @@
             });
         });
     </script>
-    }
+    
+    <script>
+        $("#NewsletterForm").submit(function (event) {
+            var form = $('#NewsletterForm')[0];
+            var data = new FormData(form);
+            $.ajax({
+                url: '/Newsletter/SubscribeMail',
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (result) {
+                    if (result) {
+                        swal({
+                            title: "Başarılı",
+                            text: "E-Posta Bültenine Abone Olduğunuz İçin Teşekkürler",
+                            icon: "success",
+                            button: "Tamam",
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Başarısız",
+                            text: "Lütfen Tekrar Deneyin",
+                            icon: "warning",
+                            button: "Tamam",
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    </script>
+
     <a href="#home" class="scroll" id="toTop" style="display: block;">
         <span id="toTopHover" style="opacity: 1;"> </span>
     </a>
     <!-- //Custom-JavaScript-File-Links -->
     <script src="~/CoreBlogTemplate/js/bootstrap.js"></script>
     @*//Sayfalar içerisinde yazılan harici scripleri buraya basar*@
-    @RenderSection("Scripts" , required: false)
+    @await RenderSectionAsync("Scripts" , required: false)
 </body>
 
 </html>
