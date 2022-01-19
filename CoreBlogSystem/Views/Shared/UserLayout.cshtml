@@ -138,6 +138,7 @@
     </script>
     
     <script>
+        //E-Posta Bültenine Abone Ol Fonksiyonu. Back-End' e veriyi gönderiyor
         $("#NewsletterForm").submit(function (event) {
             var form = $('#NewsletterForm')[0];
             var data = new FormData(form);
@@ -156,6 +157,43 @@
                             title: "Başarılı",
                             text: "E-Posta Bültenine Abone Olduğunuz İçin Teşekkürler",
                             icon: "success",
+                            button: "Tamam",
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Başarısız",
+                            text: "Lütfen Tekrar Deneyin",
+                            icon: "warning",
+                            button: "Tamam",
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    </script>
+
+    <script>
+        //Yorum Yapma Fonksiyonu. Back-End' e veriyi gönderiyor
+        $("#addComment").submit(function (event) {
+            var form = $('#addComment')[0];
+            var data = new FormData(form);
+            $.ajax({
+                url: '/Comment/PartialAddComment',
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (result) {
+                    if (result) {
+                        swal({
+                            title: "Başarılı",
+                            text: "Yorumunuz İçin Teşekkürler, Bu Bizim İçin Çok Değerli",
+                            icon: "info",
                             button: "Tamam",
                         });
                     }

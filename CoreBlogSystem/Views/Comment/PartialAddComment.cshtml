@@ -1,11 +1,12 @@
-﻿<div class="comment-top">
+﻿@*Burası Bizim Yorumları Yaptığımız Partial*@
+<div class="comment-top">
     <h4>Bir Yorum Yapın</h4>
     <div class="comment-bottom">
-        <form action="#" method="post">
-            <input class="form-control" type="text" name="Name" placeholder="Adınız" required="">
+        <form action="/Comment/PartialAddComment/" method="post" id="addComment">
+            <input class="form-control" type="text" name="CommentUserName" placeholder="Adınız Soyadınız" required="">
             <input class="form-control" type="email" name="Email" placeholder="E-Posta Adresiniz" required="">
-            <input class="form-control" type="text" name="Subject" placeholder="Konu" required="">
-            <textarea class="form-control" name="Message" placeholder="Mesajınız..." required=""></textarea>
+            <input class="form-control" type="text" name="CommentTitle" placeholder="Konu" required="">
+            <textarea class="form-control" name="CommentContent" placeholder="Mesajınız..." required=""></textarea>
             <button type="submit" class="btn btn-primary submit">Gönder</button>
         </form>
     </div>

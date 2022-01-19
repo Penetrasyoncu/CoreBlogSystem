@@ -1,6 +1,8 @@
 ﻿using BusinnessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CoreBlogSystem.Controllers
 {
@@ -13,15 +15,36 @@ namespace CoreBlogSystem.Controllers
             return View();
         }
 
+
+        [HttpGet]
         //Yorumlar alanı her blog içinde olacağı için PartialView olarak Yorum Viwei oluşturacağız.
         public PartialViewResult PartialAddComment()
         {
             return PartialView();
         }
 
+        [HttpPost]
+        public JsonResult PartialAddComment(Comment p)
+        {
+            try
+            {
+                p.CommentDate = DateTime.Now;
+                p.CommentStatus = true;
+                p.BlogID = 13;
+                cm.CommentAdd(p);
+
+                return Json(true);
+
+            }
+            catch (System.Exception)
+            {
+                return Json(false);
+            }
+        }
+
         public PartialViewResult CommentListByBlog(int id)
         {
-            var values =  cm.GetList(id);
+            var values = cm.GetList(id);
             return PartialView(values);
         }
     }
