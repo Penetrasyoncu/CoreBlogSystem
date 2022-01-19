@@ -22,7 +22,8 @@ namespace CoreBlogSystem.Controllers
         {
             return PartialView();
         }
-
+        //Yukarıda Get ile Partial olarak yorum formunu her blogun altına gönderdik
+        //Post Yani burada girilen verileri alıp DB' ye kaydediyoruz.
         [HttpPost]
         public JsonResult PartialAddComment(Comment p)
         {
