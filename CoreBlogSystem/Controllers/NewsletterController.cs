@@ -2,6 +2,7 @@
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CoreBlogSystem.Controllers
 {
@@ -20,9 +21,9 @@ namespace CoreBlogSystem.Controllers
             try
             {
                 p.MailStatus = true;
+                p.MailAddDate = DateTime.Now;
                 nm.AddNewsletter(p);
                 return Json(true);
-
             }
             catch (System.Exception)
             {

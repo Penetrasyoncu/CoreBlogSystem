@@ -13,5 +13,6 @@ namespace EntityLayer.Concrete
         public int MailID { get; set; }
         public string MailAdress { get; set; }
         public bool MailStatus { get; set; }
+        public DateTime MailAddDate { get; set; }
     }
 }
