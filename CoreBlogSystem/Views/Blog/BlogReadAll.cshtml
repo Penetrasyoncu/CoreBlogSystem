@@ -61,12 +61,14 @@
                     <div class="tech-btm">
                         <img src="~/CoreBlogTemplate/images/banner1.jpg" class="img-fluid" alt="">
                     </div>
+                    <h5>E-Posta Bültenine Abone Ol</h5>
                     @await Html.PartialAsync("~/Views/Newsletter/SubscribeMail.cshtml")
                     @*Kategorileri Getiren ViewComponent*@
                     @await Component.InvokeAsync("CategoryList")
                     @*Yazarın Diğer Yazıları Kısmını Getiren Component*@
                     @await Component.InvokeAsync("WriterLastBlog")
-                    <div class="single-gd my-5 tech-btm">
+
+                    @*<div class="single-gd my-5 tech-btm">
                         <h4>Our Progress</h4>
                         <div class="progress">
                             <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0"
@@ -88,13 +90,13 @@
                             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
                                  aria-valuemax="100"></div>
                         </div>
-                    </div>
-                    <div class="single-gd tech-btm">
+                    </div>*@
+                    @*<div class="single-gd tech-btm">
                         <h4>Son Yazılar</h4>
                         <div class="blog-grids">
                             <div class="blog-grid-left">
                                 <a href="#">
-                                    <img src="images/b1.jpg" class="img-fluid" alt="">
+                                    <img src="~/CoreBlogTemplate/images/b1.jpg" class="img-fluid" alt="">
                                 </a>
                             </div>
                             <div class="blog-grid-right">
@@ -104,9 +106,8 @@
                             </div>
                             <div class="clearfix"> </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
-
             </aside>
             <!--//right-->
         </div>
