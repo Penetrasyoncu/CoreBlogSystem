@@ -19,15 +19,16 @@ namespace CoreBlogSystem.Controllers
     //Kullanıcı bilgileri ile giriş yapmayan kimse aşağıdaki actionlara erişemeyecek.
     
     public class WriterController : Controller
-    {                
+    {        
+        [AllowAnonymous]
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 
         public IActionResult WriterProfile()
         {
             return View();
-        }
+        }        
     }
 }

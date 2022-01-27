@@ -53,6 +53,12 @@ namespace BusinnessLayer.Concrete
             return _blogDal.GetListAll();
         }
 
+        public List<Blog> GetLast3Blog()
+        {
+            //Footer' daki 3 Blog'u DB' den Getirdiğimiz Sorgu
+            return _blogDal.GetListAll().Take(3).ToList();
+        }
+
         public List<Blog> GetBlogListByWriter(int id)
         {
             //Burası da Yazarın Diğer Yazıları Alanı. Yazar ID' sine göre yazıları getiriyoruz
