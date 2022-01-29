@@ -17,10 +17,10 @@ namespace CoreBlogSystem.Controllers
     //[Authorize] attributesini Controller seviyesine yani en yukarıya çıkararak yapabiliriz.
     //Böylece aşağısında kalan tüm actionlara yetkisiz erişimi engelleyeceğiz.
     //Kullanıcı bilgileri ile giriş yapmayan kimse aşağıdaki actionlara erişemeyecek.
-    
+
+    [AllowAnonymous]
     public class WriterController : Controller
-    {        
-        [AllowAnonymous]
+    {                
         public IActionResult Index()
         {            
             return View();
@@ -29,6 +29,16 @@ namespace CoreBlogSystem.Controllers
         public IActionResult WriterProfile()
         {
             return View();
-        }        
+        }
+        
+        public PartialViewResult WriterNavbarPartial()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult WriterFooterPartial()
+        {
+            return PartialView();
+        }
     }
 }
