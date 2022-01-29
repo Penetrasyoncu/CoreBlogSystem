@@ -1,0 +1,46 @@
+﻿@model EntityLayer.Concrete.Blog
+
+@{
+    ViewData["Title"] = "Yeni Blog Ekle";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@using (Html.BeginForm("BlogAdd", "Blog", FormMethod.Post))
+{
+    //Burada DB' de kaç kolon varsa hepsini doldurmak zorundayız. Eklemiyor yoksa'
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="BlogTitle">Blog Başlığı</label>
+            @Html.TextBoxFor(x=>x.BlogTitle, new {@class = "form-control"})
+            @Html.ValidationMessageFor(x=>x.BlogTitle,"",new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="BlogContent">Blog İçeriği</label>
+            @Html.TextAreaFor(x=>x.BlogContent, 15, 3, new {@class = "form-control"})
+            @Html.ValidationMessageFor(x=>x.BlogContent,"",new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="CategoryID">Kategori Seçimi</label>
+            @Html.TextBoxFor(x=>x.CategoryID, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="BlogImage">Resim Giriniz</label>
+            @Html.TextBoxFor(x=>x.BlogImage, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="BlogThumbnailImage">ThumbnailImage Giriniz</label>
+            @Html.TextBoxFor(x=>x.BlogThumbnailImage, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <button type="submit" class="btn btn-info">Yazıyı Kaydet</button>
+    </div>
+}

@@ -18,19 +18,19 @@ namespace BusinnessLayer.Concrete
             _blogDal = blogDal;
         }
 
-        public void BlogAdd(Blog blog)
+        public void TAdd(Blog t)
         {
-            _blogDal.Insert(blog);
+            _blogDal.Insert(t);
         }
 
-        public void BlogDelete(Blog category)
+        public void TDelete(Blog t)
         {
-            _blogDal.Delete(category);
+            _blogDal.Delete(t);
         }
 
-        public void BlogUpdate(Blog category)
+        public void TUpdate(Blog t)
         {
-            _blogDal.Update(category);
+            _blogDal.Update(t);
         }
 
         public List<Blog> GetBlogListWithCategory()
@@ -43,8 +43,8 @@ namespace BusinnessLayer.Concrete
             return _blogDal.GetByID(id);
         }
 
-        public List<Blog> GetBlogByID(int id) {
-
+        public List<Blog> GetBlogByID(int id)
+        {
             return _blogDal.GetListAll(x => x.BlogID == id);
         }
 
@@ -62,7 +62,7 @@ namespace BusinnessLayer.Concrete
         public List<Blog> GetBlogListByWriter(int id)
         {
             //Burası da Yazarın Diğer Yazıları Alanı. Yazar ID' sine göre yazıları getiriyoruz
-            return _blogDal.GetListAll(x=>x.WriterID == id);
+            return _blogDal.GetListAll(x => x.WriterID == id);
         }
     }
 }
