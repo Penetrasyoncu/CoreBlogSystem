@@ -71,7 +71,7 @@
                         </a>
                     </li>
                     @await Component.InvokeAsync("WriterMessageNotification")
-                    @await Component.InvokeAsync("WriterNotification")                    
+                    @await Component.InvokeAsync("WriterNotification")
                     <li class="nav-item nav-logout d-none d-lg-block">
                         <a class="nav-link" href="#">
                             <i class="mdi mdi-power"></i>
@@ -94,8 +94,8 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     @RenderBody()
-                </div>                                
-                @await Html.PartialAsync("~/Views/Writer/WriterFooterPartial.cshtml")                
+                </div>
+                @await Html.PartialAsync("~/Views/Writer/WriterFooterPartial.cshtml")
             </div>
             <!-- main-panel ends -->
         </div>
@@ -111,6 +111,8 @@
     <script src="~/writer/assets/js/off-canvas.js"></script>
     <script src="~/writer/assets/js/hoverable-collapse.js"></script>
     <script src="~/writer/assets/js/misc.js"></script>
+    <script src="~/writer/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/writer/assets/js/dashboard.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->

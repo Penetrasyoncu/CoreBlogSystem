@@ -24,8 +24,8 @@
     </div>
     <div class="form-row">
         <div class="col-md-12 mb-3">
-            <label for="CategoryID">Kategori Seçimi</label>
-            @Html.TextBoxFor(x=>x.CategoryID, new {@class = "form-control"})
+            <label for="CategoryID">Kategori Seçimi</label>            
+            @Html.DropDownListFor(x=>x.CategoryID, (List<SelectListItem>)ViewBag.Cv, new{@class="form-control"})
         </div>
     </div>
     <div class="form-row">

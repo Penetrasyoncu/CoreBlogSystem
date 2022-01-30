@@ -64,5 +64,11 @@ namespace BusinnessLayer.Concrete
             //Burası da Yazarın Diğer Yazıları Alanı. Yazar ID' sine göre yazıları getiriyoruz
             return _blogDal.GetListAll(x => x.WriterID == id);
         }
+
+        public List<Blog> GetListCategoryWriter(int id)
+        {
+            //Yazar Panelinde Kategorilerin Adını Getiriyoruz. O Yazarın Yazı Yazdığı Kategoriyi Yani
+            return _blogDal.GetListWithCategoryByWriter(id);
+        }
     }
 }
