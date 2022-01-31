@@ -14,6 +14,8 @@ namespace CoreBlogSystem.Controllers
 {
     public class DashboardController : Controller
     {
+        BlogManager bm = new BlogManager(new EfBlogRepository());
+
         public IActionResult Index()
         {
             return View();

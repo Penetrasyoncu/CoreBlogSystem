@@ -33,7 +33,7 @@ namespace CoreBlogSystem.Controllers
                 p.WriterAbout = "İlk Yazar İbrahim";
                 p.WriterAddDate = DateTime.Now;
 
-                vm.WriterAdd(p);
+                vm.TAdd(p);
                 //RedirectToAction Metodu Adından da anlaşılacağı gibi Action'a Yönlendiriyor.
                 //İlk kısım ActionName ikincisi Nerde olduğu Yani Controller Adı
                 return RedirectToAction("Index", "Blog");
