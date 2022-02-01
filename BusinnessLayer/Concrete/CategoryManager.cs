@@ -43,5 +43,15 @@ namespace BusinnessLayer.Concrete
         {
             return _categoryDal.GetListAll();
         }
+
+        public List<Category> TGetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Category TGetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

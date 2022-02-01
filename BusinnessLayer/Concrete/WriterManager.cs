@@ -17,17 +17,7 @@ namespace BusinnessLayer.Concrete
         {
             _writerdal = writerdal;
         }
-
-        public Writer GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Writer> GetList()
-        {
-            throw new NotImplementedException();
-        }
-
+                
         public List<Writer> GetWriterListById(int id)
         {
             //Dashboard' daki Yazar Hakkında Kısmını  Getirmek için kullanıyoruz. Giriş yapan kullanıcının hakkında bilgisi
@@ -47,6 +37,16 @@ namespace BusinnessLayer.Concrete
         public void TUpdate(Writer t)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Writer> TGetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Writer TGetById(int id)
+        {
+            return _writerdal.GetByID(id);
         }
     }
 }

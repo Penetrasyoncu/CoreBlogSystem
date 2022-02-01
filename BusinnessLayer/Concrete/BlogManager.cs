@@ -70,5 +70,15 @@ namespace BusinnessLayer.Concrete
             //Yazar Panelinde Kategorilerin Adını Getiriyoruz. O Yazarın Yazı Yazdığı Kategoriyi Yani
             return _blogDal.GetListWithCategoryByWriter(id);
         }
+
+        public List<Blog> TGetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Blog TGetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -20,15 +20,18 @@ namespace CoreBlogSystem.Controllers
 
     [AllowAnonymous]
     public class WriterController : Controller
-    {                
+    {
+        WriterManager wm = new WriterManager(new EfWriterRepository());
+
         public IActionResult Index()
         {            
             return View();
         }
 
-        public IActionResult WriterProfile()
+        public IActionResult WriterEditProfile()
         {
-            return View();
+            var writerValues = wm.TGetById(1);
+            return View(writerValues);
         }
         
         public PartialViewResult WriterNavbarPartial()

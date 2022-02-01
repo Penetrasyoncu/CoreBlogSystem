@@ -38,6 +38,16 @@ namespace BusinnessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public About TGetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<About> TGetList()
+        {
+            throw new NotImplementedException();
+        }
+
         public void TUpdate(About t)
         {
             throw new NotImplementedException();
