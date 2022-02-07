@@ -1,23 +1,17 @@
-﻿@model EntityLayer.Concrete.Writer
+﻿@model AddProfileImage
 @{
-    ViewData["Title"] = "WriterEditProfile";
+    ViewData["Title"] = "Yeni Yazar Ekle";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
-@using (Html.BeginForm("WriterEditProfile", "Writer", FormMethod.Post))
-{
+<form class="form-group" method="post" enctype="multipart/form-data">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Yazar Bilgileri</h4>
-                <p class="card-description"> Tüm Bilgilerinizi Kontrol Edebilirsiniz</p>
+                <h4 class="card-title">Eklenecek Yazarın Bilgileri</h4>                
                 <br>
                 @Html.HiddenFor(x=>x.WriterID,  new {@class="form-control"})
-                <form class="forms-sample">
-                    <div class="form-group">
-                        <label for="WriterID">Yazar ID</label>
-                        @Html.TextBoxFor(x=>x.WriterID, new {@class="form-control", @readonly = "readonly"})                        
-                    </div>
+                <div class="forms-sample">                    
                     <div class="form-group">
                         <label for="WriterName">Yazar Adı</label>
                         @Html.TextBoxFor(x=>x.WriterName,  new {@class="form-control"})
@@ -35,23 +29,24 @@
                     </div>
                     <div class="form-group">
                         <label>Profil Resmi</label>
-                        <input type="file" name="img[]" class="file-upload-default">
+                        @*<input type="file" name="WriterImage" class="file-upload-default">
                         <div class="input-group col-xs-12">
                             <input type="text" class="form-control file-upload-info" disabled placeholder="Profil Resmi Seç">
                             <span class="input-group-append">
                                 <button class="file-upload-browse btn btn-gradient-primary" type="button">Resim Seç</button>
                             </span>
-                        </div>
+                        </div>*@
+                        <input type="file" name="WriterImage"/>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputCity1">Yazar Hakkında</label>
                         @Html.TextAreaFor(x=>x.WriterAbout,  10,3, new {@class="form-control"})
                         @Html.ValidationMessageFor(x=>x.WriterAbout,"",new {@class = "text-danger"})
-                    </div>                    
-                    <button type="submit" class="btn btn-gradient-primary mr-2">Güncelle</button>                    
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">Kaydet</button>
                     <button class="btn btn-light">İptal</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-}
+</form>

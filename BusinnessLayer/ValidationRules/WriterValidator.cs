@@ -30,7 +30,7 @@ namespace BusinnessLayer.ValidationRules
         {
             try
             {
-                Regex regex = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$");
+                Regex regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$");
                 return regex.IsMatch(arg);
             }
             catch
