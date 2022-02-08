@@ -11,10 +11,12 @@ namespace CoreBlogSystem.ViewComponents.Writer
 {
     public class WriterNotification : ViewComponent
     {
-        //Burası Yazar Panelinde Bildirimlerin Tamamını Göstereceğiz
+        //Burada Bildirimlerin Tamamını Göstereceğiz
+        NotificationManager nm = new NotificationManager(new EfNotificationRepository());
         public IViewComponentResult Invoke()
         {
-            return View();
+            var values = nm.TGetList();
+            return View(values);
         }
     }
 }

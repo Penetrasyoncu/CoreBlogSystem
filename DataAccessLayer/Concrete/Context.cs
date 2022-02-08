@@ -30,5 +30,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<County> Counties { get; set; }
         public DbSet<Newsletter> Newsletters{ get; set; }
         public DbSet<BlogRating> BlogRatings{ get; set; }
+        public DbSet<Notification> Notifications{ get; set; }
     }
 }
