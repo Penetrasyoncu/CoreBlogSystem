@@ -14,9 +14,17 @@ namespace CoreBlogSystem.Controllers
 {
     public class NotificationController : Controller
     {
+        NotificationManager nm = new NotificationManager(new EfNotificationRepository());
+
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult AllNotification()
+        {            
+            var values = nm.TGetList();
+            return View(values);
         }
     }
 }

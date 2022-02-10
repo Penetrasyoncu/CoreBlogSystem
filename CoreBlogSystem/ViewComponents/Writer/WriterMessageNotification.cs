@@ -10,11 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoreBlogSystem.ViewComponents.Writer
 {
     public class WriterMessageNotification : ViewComponent
-    {        
+    {
         //Burası Yazar Panelinde Mesajlaşmayı Göstereceğiz
+
+        MessageManager mm = new MessageManager(new EfMessageRepository());
         public IViewComponentResult Invoke()
-        {                        
-            return View();
+        {
+            string p;
+            p = "ibrahim.okuyucu@setup34.com.tr";
+            var values = mm.GetInboxListByWriter(p);
+            return View(values);
         }
     }
 }
