@@ -16,7 +16,7 @@ namespace CoreBlogSystem.ViewComponents.Category
         public IViewComponentResult Invoke()
         {
             //Burası Kategori Listelerini Getirdiğimiz Alan. İstediğimiz Heryerde Çağırabiliriz
-            var values = cm.GetList();
+            var values = cm.GetList();            
             return View(values);
         }
     }

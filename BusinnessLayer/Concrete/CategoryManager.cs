@@ -52,6 +52,6 @@ namespace BusinnessLayer.Concrete
         public Category TGetById(int id)
         {
             throw new NotImplementedException();
-        }
+        }       
     }
 }
