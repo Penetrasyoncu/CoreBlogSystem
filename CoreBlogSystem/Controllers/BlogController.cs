@@ -40,7 +40,15 @@ namespace CoreBlogSystem.Controllers
             return View(values);
         }
 
-        [HttpGet]
+        public IActionResult BlogListByCategory(int id)
+        {
+            //Bu Alan Kategoriye Göre Blogları Getiriyor Örn: Oyun Kategorisinde 5 Yazı var onları getiriyor
+            var values = bm.GetListBlogCategory(id);  
+            //ViewBag.CategorName = values[0].Category.ToString();
+            return View(values);
+        }
+
+        [HttpGet] 
         public IActionResult BlogAdd()
         {
             //Kategorileri DropDown'a Çektiğimiz Alan            

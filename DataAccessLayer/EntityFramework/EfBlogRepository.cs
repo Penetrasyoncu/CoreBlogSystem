@@ -27,6 +27,15 @@ namespace DataAccessLayer.EntityFramework
             }
         }
 
+        public List<Blog> GetListWithCategoryByBlogs(int id)
+        {
+            using (var c = new Context())
+            {
+                //Burada da o Kategoriye Ait Kaç Yazı Varsa Onları Listeleyeceğiz
+                return c.Blogs.Include(x => x.Category).Where(i => i.CategoryID == id).ToList();
+            }
+        }
+
         public List<Blog> GetListWithCategoryByWriter(int id)
         {
             using (var c = new Context())

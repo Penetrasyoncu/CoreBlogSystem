@@ -13,5 +13,6 @@ namespace DataAccessLayer.Abstract
         //Yani biz buraya yazacağımız metodlar bloga kategoriye özgü olabilir başka yerlerde çağırabiliriz.
         List<Blog> GetListWithCategory();     
         List<Blog> GetListWithCategoryByWriter(int id);     
+        List<Blog> GetListWithCategoryByBlogs(int id);     
     }
 }
