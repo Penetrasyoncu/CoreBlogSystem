@@ -2,6 +2,7 @@
 using BusinnessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using CoreBlogSystem.Helpers;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -74,6 +75,10 @@ namespace CoreBlogSystem.Controllers
                 p.BlogStatus = true;
                 p.BlogCreateDate = DateTime.Now;
                 p.WriterID = 1;
+                if (string.IsNullOrEmpty(p.BlogUrl))
+                {
+                    p.BlogUrl = Tool.CreateUrlSlug(p.BlogTitle);
+                }
                 bm.TAdd(p);
                 //RedirectToAction Metodu Adından da anlaşılacağı gibi Action'a Yönlendiriyor.
                 //İlk kısım ActionName ikincisi Nerde olduğu Yani Controller Adı

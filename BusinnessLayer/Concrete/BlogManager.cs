@@ -48,6 +48,11 @@ namespace BusinnessLayer.Concrete
             return _blogDal.GetListAll(x => x.BlogID == id);
         }
 
+        public List<Blog> GetBlogByUrl(string url)
+        {
+            return _blogDal.GetListAll(x => x.BlogUrl == url && x.BlogStatus == true);
+        }
+
         public List<Blog> GetList()
         {
             return _blogDal.GetListAll();

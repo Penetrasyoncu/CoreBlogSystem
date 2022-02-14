@@ -47,7 +47,13 @@
             <label for="CategoryID">Kategori Seçimi</label>
             @Html.DropDownListFor(x=>x.CategoryID, (List<SelectListItem>)ViewBag.Cv, new{@class="form-control"})
         </div>
-    </div>       
+    </div>    
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="BlogImage">Url Giriniz</label>
+            @Html.TextBoxFor(x=>x.BlogUrl, new {@class = "form-control"})
+        </div>
+    </div>
     <div class="form-row">
         <button type="submit" class="btn btn-info">Yazıyı Güncelle</button>
     </div>
