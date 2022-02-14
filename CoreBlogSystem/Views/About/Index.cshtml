@@ -22,7 +22,7 @@
                     </h3>
                     @foreach (var item in Model)
                     {
-                        <p>@item.AboutDetails1</p>
+                        <p>@Html.Raw(item.AboutDetails1)</p>
                     }
                     <a href="#" class="btn btn-primary read-m">Devamını Oku</a>
                 </div>

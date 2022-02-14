@@ -17,18 +17,18 @@
                     {
                         <div class="col-lg-4 card mx-auto">
                             <a href="#">
-                                <img src="@item.BlogImage" class="card-img-top img-fluid" alt="">
+                                <img src="@Html.Raw(item.BlogImage)" class="card-img-top img-fluid" alt="">
                             </a>
                             <div class="card-body">
                                 <ul class="blog-icons my-4">
                                     <li>
                                         <a href="#">
-                                            <i class="far fa-calendar-alt"></i>@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))
+                                            <i class="far fa-calendar-alt"></i>@Html.Raw((((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy")))
                                         </a>
                                     </li>
                                     <li class="mx-2">
                                         <a href="#">
-                                            <i class="far fa-comment"></i> @item.Category.CategoryName
+                                            <i class="far fa-comment"></i> @Html.Raw(item.Category.CategoryName)
                                         </a>
                                     </li>
                                     <li>
@@ -38,12 +38,12 @@
                                     </li>
                                 </ul>
                                 <h5 class="card-title ">
-                                    <a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle</a>
+                                    <a href="/Blog/BlogReadAll/@item.BlogID">@Html.Raw(item.BlogTitle)</a>
                                 </h5>
-                                <p class="card-text mb-3">@item.BlogContent.Substring(0,item.BlogContent.Substring(0,130).LastIndexOf(" "))...</p>
+                                <p class="card-text mb-3">@Html.Raw(item.BlogContent.Substring(0,item.BlogContent.Substring(0,130).LastIndexOf(" ")))...</p>
                                 <a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-primary read-m">Devamını Oku</a>
                             </div>
-                        </div>                        
+                        </div>
                     }
                 </div>
                 <!--//left-->

@@ -16,8 +16,8 @@
     {
         <tr>
             <td>@item.NotificationID</td>
-            <td>@item.NotificationDetails</td>
-            <td>@item.NotificationDate</td>
+            <td>@Html.Raw(item.NotificationDetails)</td>
+            <td>@Html.Raw(item.NotificationDate)</td>
         </tr>
     }
 </table>

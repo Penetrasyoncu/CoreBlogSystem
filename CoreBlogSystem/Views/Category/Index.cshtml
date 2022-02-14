@@ -19,7 +19,7 @@
     {
         <tr>
             <td>@item.CategoryID</td>
-            <td>@item.CategoryName</td>
+            <td>@Html.Raw(item.CategoryName)</td>
             <td>@item.CategoryStatus</td>
             <td><a href="#" class="btn btn-warning">Detaylar</a></td>
             <td><a href="#" class="btn btn-danger">Sil</a></td>
