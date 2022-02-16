@@ -38,7 +38,7 @@ namespace CoreBlogSystem.Controllers
                 ClaimsPrincipal principal = new ClaimsPrincipal(UserIdentity);
                 await HttpContext.SignInAsync(principal);
 
-                return RedirectToAction("Index", "Writer");
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {

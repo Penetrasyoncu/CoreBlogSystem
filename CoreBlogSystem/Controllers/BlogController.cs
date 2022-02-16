@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataAccessLayer.Concrete;
 
 namespace CoreBlogSystem.Controllers
 {
@@ -18,6 +19,7 @@ namespace CoreBlogSystem.Controllers
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+        Context c = new Context();
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
@@ -36,20 +38,22 @@ namespace CoreBlogSystem.Controllers
         {
             //Burası Yazarın Yazdığı Yazılar ve Yazar Panelinde Listeliyoruz
             //Yazarın diğer yazıları dediğimiz blogların ındex sayfasında da aynı yapıyı kullanıyoruz.
-            //var values = bm.GetBlogListByWriter(1);
-            var values = bm.GetListCategoryWriter(1);
+            //var values = bm.GetBlogListByWriter(1);            
+            var userMail = User.Identity.Name;
+            var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var values = bm.GetListCategoryWriter(WriterID);
             return View(values);
         }
 
         public IActionResult BlogListByCategory(int id)
         {
             //Bu Alan Kategoriye Göre Blogları Getiriyor Örn: Oyun Kategorisinde 5 Yazı var onları getiriyor
-            var values = bm.GetListBlogCategory(id);  
+            var values = bm.GetListBlogCategory(id);
             //ViewBag.CategorName = values[0].Category.ToString();
             return View(values);
         }
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult BlogAdd()
         {
             //Kategorileri DropDown'a Çektiğimiz Alan            
@@ -70,11 +74,14 @@ namespace CoreBlogSystem.Controllers
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(p);
 
+            var userMail = User.Identity.Name;
+            var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+
             if (results.IsValid)
             {
                 p.BlogStatus = true;
                 p.BlogCreateDate = DateTime.Now;
-                p.WriterID = 1;
+                p.WriterID = WriterID;
                 if (string.IsNullOrEmpty(p.BlogUrl))
                 {
                     p.BlogUrl = Tool.CreateUrlSlug(p.BlogTitle);
@@ -121,7 +128,12 @@ namespace CoreBlogSystem.Controllers
         public IActionResult EditBlog(Blog p)
         {
             //Blog Edit/Güncelleme İşlemi
-            p.WriterID = 1;
+            var userMail = User.Identity.Name;
+            var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var values = bm.GetListCategoryWriter(WriterID);
+            p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToLongDateString());
+            p.BlogStatus = true;
+            p.WriterID = WriterID;
             bm.TUpdate(p);
             return RedirectToAction("BlogListByWriter");
         }

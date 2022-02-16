@@ -1,6 +1,7 @@
 ﻿using BusinnessLayer.Concrete;
 using BusinnessLayer.ValidationRules;
 using CoreBlogSystem.Models;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -28,17 +29,22 @@ namespace CoreBlogSystem.Controllers
 
         public IActionResult Index()
         {
+            var usermail = User.Identity.Name;
+            ViewBag.v = usermail;
             return View();
         }
-        
+
         //Şuan da 1 ID' li yazarın bilgilerini güncelliyoruz. Giriş yapanın ki olacak
         [HttpGet]
         public IActionResult WriterEditProfile()
         {
-            var writerValues = wm.TGetById(1);
+            Context c = new Context();
+            var userMail = User.Identity.Name;
+            var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var writerValues = wm.TGetById(WriterID);
             return View(writerValues);
         }
-        
+
         [HttpPost]
         public IActionResult WriterEditProfile(Writer p)
         {
@@ -61,7 +67,7 @@ namespace CoreBlogSystem.Controllers
         //Burası Yeni Yazar Ekleme Kısmı Görseli İle
         [HttpGet]
         public IActionResult WriterAdd()
-        {            
+        {
             return View();
         }
 
@@ -81,7 +87,7 @@ namespace CoreBlogSystem.Controllers
             w.WriterMail = p.WriterMail;
             w.WriterName = p.WriterName;
             w.WriterPassword = p.WriterPassword;
-            w.WriterStatus = true;            
+            w.WriterStatus = true;
             w.WriterAbout = p.WriterAbout;
             w.WriterAddDate = DateTime.Now;
 

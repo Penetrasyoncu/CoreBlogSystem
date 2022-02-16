@@ -21,7 +21,7 @@ namespace BusinnessLayer.Concrete
         public List<Message2> GetInboxListByWriter(int id)
         {
             //Burada Alıcı Biz İsek Mesajı Gösterecek. Yani haliyle bize gelen mesajı :-)
-            return _messagedal.GetListAll(x => x.ReceiverID == id);
+            return _messagedal.GetListWithMessageByWriter(id);
         }
 
         public void TAdd(Message2 t)
@@ -36,7 +36,7 @@ namespace BusinnessLayer.Concrete
 
         public Message2 TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _messagedal.GetByID(id);
         }
 
         public List<Message2> TGetList()
