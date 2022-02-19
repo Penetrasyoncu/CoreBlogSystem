@@ -13,11 +13,7 @@
                 <p class="card-description"> Tüm Bilgilerinizi Kontrol Edebilirsiniz</p>
                 <br>
                 @Html.HiddenFor(x=>x.WriterID,  new {@class="form-control"})
-                <form class="forms-sample">
-                    <div class="form-group">
-                        <label for="WriterID">Yazar ID</label>
-                        @Html.TextBoxFor(x=>x.WriterID, new {@class="form-control", @readonly = "readonly"})
-                    </div>
+                <form class="forms-sample">                   
                     <div class="form-group">
                         <label for="WriterName">Yazar Adı</label>
                         @Html.TextBoxFor(x=>x.WriterName,  new {@class="form-control"})
