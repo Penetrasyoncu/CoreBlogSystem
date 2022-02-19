@@ -26,10 +26,10 @@ namespace CoreBlogSystem.Controllers
             return View(values);
         }
 
-        public IActionResult BlogReadAll(int id)
+        public IActionResult BlogReadAll(int id, string url)
         {
             ViewBag.CommentsValue = id;
-            //Dışarıdan Bir ID değişkeni alan bir Action Oluşturduk
+            //Dışarıdan Bir ID değişkeni alan bir Action Oluşturduk            
             var values = bm.GetBlogByID(id);
             return View(values);
         }

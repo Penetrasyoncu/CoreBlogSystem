@@ -29,7 +29,7 @@ namespace CoreBlogSystem.Helpers
                 str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
                 str = Regex.Replace(str, @"\s+", " ").Trim();
                 str = Regex.Replace(str, @"\s", "-");
-                return "/" + str;
+                return str;
             }
             catch (Exception Ex)
             {

@@ -37,7 +37,7 @@ namespace BusinnessLayer.Concrete
         public Category GetById(int id)
         {
             return _categoryDal.GetByID(id);
-        }
+        }       
 
         public List<Category> GetList()
         {
