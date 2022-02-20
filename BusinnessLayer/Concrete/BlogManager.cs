@@ -47,12 +47,7 @@ namespace BusinnessLayer.Concrete
         {
             return _blogDal.GetListAll(x => x.BlogID == id);
         }
-
-        public List<Blog> GetBlogByUrl(string url)
-        {
-            return _blogDal.GetListAll(x => x.BlogUrl == url && x.BlogStatus == true);
-        }
-
+       
         public List<Blog> GetList()
         {
             return _blogDal.GetListAll();
@@ -89,6 +84,16 @@ namespace BusinnessLayer.Concrete
         public Blog TGetById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Blog> GetBlogsByCategoryId(int categoryId)
+        {
+            return _blogDal.GetListByCategoryId(categoryId);
+        }
+
+        public Blog GetBlogByUrl(string blogUrl)
+        {
+            return _blogDal.GetBlogByUrl(blogUrl);
         }
     }
 }

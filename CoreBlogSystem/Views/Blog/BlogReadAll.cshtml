@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+﻿@model EntityLayer.Concrete.Blog
 @{
     ViewData["Title"] = "Bloglar";
     Layout = "~/Views/Shared/UserLayout.cshtml";
@@ -10,44 +10,43 @@
         <div class="row">
             <!--left-->
             <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
-                @foreach (var blog in Model)
-                {
-                    <div class="blog-grid-top">
-                        <div class="b-grid-top">
-                            <div class="blog_info_left_grid">
-                                <a href="/blog/BlogReadAll/@blog.BlogID">
-                                    <img src="@Html.Raw(blog.BlogImage)" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="blog-info-middle">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-calendar-alt"></i>@Html.Raw((((DateTime)blog.BlogCreateDate).ToString("dd-MMM-yyyy")))
-                                        </a>
-                                    </li>
-                                    <li class="mx-2">
-                                        <a href="#">
-                                            <i class="far fa-thumbs-up"></i> 0 Beğeni
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-comment"></i> 0 Yorum
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+
+                <div class="blog-grid-top">
+                    <div class="b-grid-top">
+                        <div class="blog_info_left_grid">
+                            <a href="/blog/@Model.Category.CategorUrl/@Model.BlogUrl">
+                                <img src="@Html.Raw(Model.BlogImage)" class="img-fluid" alt="">
+                            </a>
                         </div>
-                        <h3>
-                            <a href="#">@Html.Raw(blog.BlogTitle)</a>
-                        </h3>
-                        <p>
-                            @Html.Raw(blog.BlogContent)
-                        </p>
-                        <a href="/Blog/Index/" class="btn btn-primary read-m">Blog Listesi</a>
+                        <div class="blog-info-middle">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-calendar-alt"></i>@Html.Raw((((DateTime)Model.BlogCreateDate).ToString("dd-MMM-yyyy")))
+                                    </a>
+                                </li>
+                                <li class="mx-2">
+                                    <a href="#">
+                                        <i class="far fa-thumbs-up"></i> 0 Beğeni
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-comment"></i> 0 Yorum
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                }
+                    <h3>
+                        <a href="#">@Html.Raw(Model.BlogTitle)</a>
+                    </h3>
+                    <p>
+                        @Html.Raw(Model.BlogContent)
+                    </p>
+                    <a href="/Blog/Index/" class="btn btn-primary read-m">Blog Listesi</a>
+                </div>
+
                 @*@await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")*@
                 @*Aşağıdaki İlk Satır ViewComponent Kullandığımız Alan.*@
                 @await Component.InvokeAsync("CommentListByBlog", new{id = ViewBag.CommentsValue})

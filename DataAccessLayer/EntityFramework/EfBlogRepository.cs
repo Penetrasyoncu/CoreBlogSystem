@@ -13,6 +13,22 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfBlogRepository : GenericRepository<Blog>, IBlogDal
     {
+        public Blog GetBlogByUrl(string url)
+        {
+            using (var c = new Context())
+            {
+                return c.Blogs.Include(x=>x.Category).FirstOrDefault(x=>x.BlogUrl == url);
+            }
+        }
+
+        public List<Blog> GetListByCategoryId(int categoryId)
+        {
+            using (var c = new Context())
+            {
+                return c.Blogs.Include(x=>x.Category).Where(x => x.CategoryID == categoryId).ToList();
+            }
+        }
+
         public List<Blog> GetListWithCategory()
         {
             //IBlogDal içerisine yeni bir metod eklediğimiz için burası hata verdi. Dedi ki;

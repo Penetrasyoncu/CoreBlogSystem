@@ -37,7 +37,7 @@ namespace BusinnessLayer.Concrete
         public Category GetById(int id)
         {
             return _categoryDal.GetByID(id);
-        }       
+        }
 
         public List<Category> GetList()
         {
@@ -52,6 +52,11 @@ namespace BusinnessLayer.Concrete
         public Category TGetById(int id)
         {
             throw new NotImplementedException();
-        }       
+        }
+
+        public Category GetCategoryByUrl(string url)
+        {
+            return _categoryDal.GetCategoryByUrl(url);
+        }
     }
 }

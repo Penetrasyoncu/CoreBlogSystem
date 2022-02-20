@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace BusinnessLayer.Abstract
 {
     public interface ICategoryService : IGenericService<Category>
-    {       
+    {
+        Category GetCategoryByUrl(string url);
     }
 }

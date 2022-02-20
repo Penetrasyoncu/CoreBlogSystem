@@ -26,12 +26,20 @@ namespace CoreBlogSystem.Controllers
             return View(values);
         }
 
-        public IActionResult BlogReadAll(int id, string url)
+        [Route("Blog/{categoryUrl}/{blogUrl}")]
+        public IActionResult BlogReadAll(string blogUrl)
         {
-            ViewBag.CommentsValue = id;
-            //Dışarıdan Bir ID değişkeni alan bir Action Oluşturduk            
-            var values = bm.GetBlogByID(id);
-            return View(values);
+            var blog = bm.GetBlogByUrl(blogUrl);
+            ViewBag.CommentsValue = blog.BlogID;
+            return View(blog);
+        }
+
+        [Route("Blog/{categoryUrl}")]
+        public IActionResult Category(string categoryUrl)
+        {
+            var category = cm.GetCategoryByUrl(categoryUrl);
+            var blogs = bm.GetBlogsByCategoryId(category.CategoryID);
+            return View("BlogListByCategory", blogs);
         }
 
         public IActionResult BlogListByWriter()

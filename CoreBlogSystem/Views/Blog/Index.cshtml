@@ -38,10 +38,10 @@
                                     </li>
                                 </ul>
                                 <h5 class="card-title ">
-                                    <a href="/Blog/BlogReadAll/@item.BlogID">@Html.Raw(item.BlogTitle)</a>
+                                    <a href="/blog/@item.Category.CategorUrl/@item.BlogUrl">@Html.Raw(item.BlogTitle)</a>
                                 </h5>
                                 <p class="card-text mb-3">@Html.Raw(item.BlogContent.Substring(0,item.BlogContent.Substring(0,130).LastIndexOf(" ")))...</p>
-                                <a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-primary read-m">Devamını Oku</a>
+                                <a href="/blog/@item.Category.CategorUrl/@item.BlogUrl" class="btn btn-primary read-m">Devamını Oku</a>
                             </div>
                         </div>
                     }
