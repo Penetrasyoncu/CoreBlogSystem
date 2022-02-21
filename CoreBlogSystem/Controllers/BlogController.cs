@@ -29,9 +29,16 @@ namespace CoreBlogSystem.Controllers
         [Route("Blog/{categoryUrl}/{blogUrl}")]
         public IActionResult BlogReadAll(string blogUrl)
         {
-            var blog = bm.GetBlogByUrl(blogUrl);
-            ViewBag.CommentsValue = blog.BlogID;
-            return View(blog);
+            try
+            {
+                var blog = bm.GetBlogByUrl(blogUrl);
+                ViewBag.CommentsValue = blog.BlogID;
+                return View(blog);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [Route("Blog/{categoryUrl}")]

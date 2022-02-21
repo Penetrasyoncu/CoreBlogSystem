@@ -5,9 +5,10 @@
     <ul class="list-group single">
         @foreach (var item in Model)
         {
+            var categoryBlogCount = 
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <a href="/Blog/@item.CategorUrl">@item.CategoryName</a>
-                <span class="badge badge-primary badge-pill">/Blog/@item.CategorUrl</span>
+                <span class="badge badge-primary badge-pill">@item.CategoryID</span>
             </li>
         }
     </ul>
