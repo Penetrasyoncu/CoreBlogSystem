@@ -4,14 +4,16 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220223094341_userDumy")]
+    partial class userDumy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,21 +92,6 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("WriterID");
 
                     b.ToTable("Blogs");
-
-                    b.HasData(
-                        new
-                        {
-                            BlogID = 1,
-                            BlogContent = "FirsBlogLorem, FirsBlogLorem ,FirsBlogLorem",
-                            BlogCreateDate = new DateTime(2022, 2, 23, 13, 19, 54, 577, DateTimeKind.Local).AddTicks(8238),
-                            BlogImage = "/CoreBlogTemplate/images/1.jpg",
-                            BlogStatus = true,
-                            BlogThumbnailImage = "Thumbnail",
-                            BlogTitle = "FirstBlog",
-                            BlogUrl = "first-blog",
-                            CategoryID = 1,
-                            WriterID = 1
-                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.BlogRating", b =>
@@ -153,16 +140,6 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("CategoryID");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryID = 1,
-                            CategorUrl = "first-category",
-                            CategoryDescription = "First Category",
-                            CategoryName = "First Category",
-                            CategoryStatus = true
-                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.City", b =>
@@ -425,12 +402,12 @@ namespace DataAccessLayer.Migrations
                     b.HasData(
                         new
                         {
-                            WriterID = 1,
-                            WriterAbout = "FirstUser",
-                            WriterAddDate = new DateTime(2022, 2, 23, 13, 19, 54, 573, DateTimeKind.Local).AddTicks(3108),
+                            WriterID = 5,
+                            WriterAbout = "Yeni Yazar",
+                            WriterAddDate = new DateTime(2022, 2, 23, 12, 43, 40, 339, DateTimeKind.Local).AddTicks(3277),
                             WriterImage = "/CoreBlogTemplate/images/t1.jpg",
-                            WriterMail = "test@test.com",
-                            WriterName = "Admin",
+                            WriterMail = "deneme@denem.com",
+                            WriterName = "ugurCan",
                             WriterPassword = "123",
                             WriterStatus = true
                         });
