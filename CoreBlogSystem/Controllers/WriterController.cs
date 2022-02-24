@@ -34,6 +34,7 @@ namespace CoreBlogSystem.Controllers
             return View();
         }
 
+        
         //Şuan da 1 ID' li yazarın bilgilerini güncelliyoruz. Giriş yapanın ki olacak
         [HttpGet]
         public IActionResult WriterEditProfile()
@@ -45,6 +46,7 @@ namespace CoreBlogSystem.Controllers
             return View(writerValues);
         }
 
+
         [HttpPost]
         public IActionResult WriterEditProfile(Writer p)
         {
@@ -52,6 +54,10 @@ namespace CoreBlogSystem.Controllers
             ValidationResult result = wl.Validate(p);
             if (result.IsValid)
             {
+                if (string.IsNullOrEmpty(p.WriterImage))
+                {
+                    p.WriterImage = "/CoreBlogTemplate/images/t1.jpg";
+                }
                 wm.TUpdate(p);
                 return RedirectToAction("Index", "Dashboard");
             }

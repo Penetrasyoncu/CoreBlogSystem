@@ -24,7 +24,7 @@
     </div>
     <div class="form-row">
         <div class="col-md-12 mb-3">
-            <label for="CategoryID">Kategori Seçimi</label>            
+            <label for="CategoryID">Kategori Seçimi</label>
             @Html.DropDownListFor(x=>x.CategoryID, (List<SelectListItem>)ViewBag.Cv, new{@class="form-control"})
         </div>
     </div>
@@ -53,5 +53,5 @@
 <script src="~/js/jquery-3.6.0.min.js"></script>
 <script src="~/ckeditor/ckeditor.js"></script>
 <script>
-    var Icerik = CKEDITOR.replace('BlogContent');    
+    var Icerik = CKEDITOR.replace('BlogContent');
 </script>

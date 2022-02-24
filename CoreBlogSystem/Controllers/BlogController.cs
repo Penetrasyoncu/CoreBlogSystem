@@ -75,16 +75,17 @@ namespace CoreBlogSystem.Controllers
         {
             //Kategorileri DropDown'a Çektiğimiz Alan            
             List<SelectListItem> categoryValues = (from x in cm.GetList()
-                                                   select new SelectListItem
-                                                   {
-                                                       Text = x.CategoryName,
-                                                       Value = x.CategoryID.ToString()
-                                                   }).ToList();
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = x.CategoryName,
+                                                              Value = x.CategoryID.ToString()
+                                                          }).ToList();
             //Burası Yukarıde Çektiğimiz Verileri Front-End Tarafına Taşıyoruz.
-            ViewBag.Cv = categoryValues;
+            ViewBag.Cv = categoryValues;            
             return View();
         }
 
+        [Route("Blog/YeniBlogEkle")]
         [HttpPost]
         public IActionResult BlogAdd(Blog p)
         {
@@ -143,6 +144,7 @@ namespace CoreBlogSystem.Controllers
             return View(EditBlogValue);
         }
 
+        [Route("/Blog/EditBlog/{id}")]
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
