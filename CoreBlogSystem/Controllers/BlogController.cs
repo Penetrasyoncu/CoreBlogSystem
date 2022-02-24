@@ -49,6 +49,7 @@ namespace CoreBlogSystem.Controllers
             return View("BlogListByCategory", blogs);
         }
 
+        [Route("Blog/YazarinBloglari")]
         public IActionResult BlogListByWriter()
         {
             //Burası Yazarın Yazdığı Yazılar ve Yazar Panelinde Listeliyoruz
@@ -68,6 +69,7 @@ namespace CoreBlogSystem.Controllers
             return View(values);
         }
 
+        [Route("Blog/YeniBlogEkle")]
         [HttpGet]
         public IActionResult BlogAdd()
         {
@@ -116,6 +118,7 @@ namespace CoreBlogSystem.Controllers
             return View();
         }
 
+        [Route("/Blog/BlogDelete/{id}")]
         public IActionResult BlogDelete(int id)
         {
             //Blog Silme İşlemi
@@ -124,6 +127,7 @@ namespace CoreBlogSystem.Controllers
             return RedirectToAction("BlogListByWriter");
         }
 
+        [Route("/Blog/EditBlog/{id}")]
         [HttpGet]
         public IActionResult EditBlog(int id)
         {
