@@ -33,7 +33,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message">@User.Identity.Name Hoşgeldiniz</span>
+                            <span class="m-r-sm text-muted welcome-message">Hoşgeldiniz <b>@User.Identity.Name</b></span>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -164,7 +164,7 @@
                     Kısmi Zamanlı Blogcu <strong>.NET Core Blog System</strong>
                 </div>
                 <div>
-                    <strong>Tüm Hakları Saklıdır</strong>@DateTime.Now
+                    <strong>Tüm Hakları Saklıdır </strong>@DateTime.Now.ToShortDateString()
                 </div>
             </div>
         </div>

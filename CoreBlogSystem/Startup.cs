@@ -79,9 +79,15 @@ namespace CoreBlogSystem
 
             app.UseEndpoints(endpoints =>
             {
+                //Area Eklendiðinde Projenin Düzgün Ayaða Kalkmasý Ýçin Eklenmesi Gereken Kodlar Bunlar
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                        name: "areas",
+                        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
+                endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
