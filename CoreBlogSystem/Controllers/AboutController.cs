@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace CoreBlogSystem.Controllers
 {
     [AllowAnonymous]
+    [ValidateAntiForgeryToken]
     public class AboutController : Controller
     {
         AboutManager abm = new AboutManager(new EfAboutRepository());

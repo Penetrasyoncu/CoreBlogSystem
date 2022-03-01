@@ -12,6 +12,7 @@ using System.Linq;
 
 namespace CoreBlogSystem.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class NotificationController : Controller
     {
         NotificationManager nm = new NotificationManager(new EfNotificationRepository());

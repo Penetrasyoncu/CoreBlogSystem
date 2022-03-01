@@ -15,6 +15,7 @@ using DataAccessLayer.Concrete;
 namespace CoreBlogSystem.Controllers
 {
     [AllowAnonymous]
+    [ValidateAntiForgeryToken]
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
@@ -145,7 +146,7 @@ namespace CoreBlogSystem.Controllers
         }
 
         [Route("/Blog/EditBlog/{id}")]
-        [HttpPost]
+        [HttpPost]        
         public IActionResult EditBlog(Blog p)
         {
             //Blog Edit/Güncelleme İşlemi

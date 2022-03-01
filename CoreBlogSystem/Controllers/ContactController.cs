@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 namespace CoreBlogSystem.Controllers
 {
     [AllowAnonymous]
+    [ValidateAntiForgeryToken]
     public class ContactController : Controller
     {
         ContactManager cm = new ContactManager(new EfContactRepository());

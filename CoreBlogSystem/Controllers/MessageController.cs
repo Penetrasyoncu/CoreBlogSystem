@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace CoreBlogSystem.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class MessageController : Controller
     {
         Message2Manager mm = new Message2Manager(new EfMessage2Repository());

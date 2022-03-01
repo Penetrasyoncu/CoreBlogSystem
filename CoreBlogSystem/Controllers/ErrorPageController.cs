@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreBlogSystem.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class ErrorPageController : Controller
     {
         public IActionResult ErrorName(int code)

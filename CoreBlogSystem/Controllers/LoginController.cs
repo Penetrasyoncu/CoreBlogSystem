@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace CoreBlogSystem.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class LoginController : Controller
     {
         //Proje seviyesinde yazdığımız yetkilendirme durumunu aşağıdaki attribute ile yoksayıyoruz

@@ -15,6 +15,7 @@ using System.Security.Claims;
 
 namespace CoreBlogSystem.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class DashboardController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
