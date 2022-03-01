@@ -10,8 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 
 namespace CoreBlogSystem.Controllers
-{
-    [ValidateAntiForgeryToken]
+{    
     public class AdminController : Controller
     {
         public IActionResult Index()

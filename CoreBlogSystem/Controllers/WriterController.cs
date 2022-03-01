@@ -22,8 +22,7 @@ namespace CoreBlogSystem.Controllers
     //Böylece aşağısında kalan tüm actionlara yetkisiz erişimi engelleyeceğiz.
     //Kullanıcı bilgileri ile giriş yapmayan kimse aşağıdaki actionlara erişemeyecek.
 
-    [AllowAnonymous]
-    [ValidateAntiForgeryToken]
+    [AllowAnonymous]    
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterRepository());

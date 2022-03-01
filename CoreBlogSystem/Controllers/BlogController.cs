@@ -14,8 +14,7 @@ using DataAccessLayer.Concrete;
 
 namespace CoreBlogSystem.Controllers
 {
-    [AllowAnonymous]
-    [ValidateAntiForgeryToken]
+    [AllowAnonymous]    
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());

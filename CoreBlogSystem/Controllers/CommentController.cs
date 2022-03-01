@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace CoreBlogSystem.Controllers
-{
-    [ValidateAntiForgeryToken]
+{    
     public class CommentController : Controller
     {
         CommentManager cm = new CommentManager(new EfCommentRepository());

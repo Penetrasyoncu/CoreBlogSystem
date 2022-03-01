@@ -13,8 +13,7 @@ using System.Threading.Tasks;
 
 namespace CoreBlogSystem.Controllers
 {
-    [AllowAnonymous]
-    [ValidateAntiForgeryToken]
+    [AllowAnonymous]    
     public class ContactController : Controller
     {
         ContactManager cm = new ContactManager(new EfContactRepository());

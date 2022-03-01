@@ -8,8 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace CoreBlogSystem.Controllers
-{
-    [ValidateAntiForgeryToken]
+{    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

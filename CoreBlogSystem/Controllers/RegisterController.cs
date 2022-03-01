@@ -9,8 +9,7 @@ using System;
 
 namespace CoreBlogSystem.Controllers
 {
-    [AllowAnonymous]
-    [ValidateAntiForgeryToken]
+    [AllowAnonymous]    
     public class RegisterController : Controller
     {
         WriterManager vm = new WriterManager(new EfWriterRepository());

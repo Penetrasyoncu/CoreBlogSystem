@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace CoreBlogSystem.Controllers
-{
-    [ValidateAntiForgeryToken]
+{    
     public class NewsletterController : Controller
     {
         NewsletterManager nm = new NewsletterManager(new EfNewsletterRepository());

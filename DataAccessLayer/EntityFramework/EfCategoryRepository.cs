@@ -16,7 +16,7 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var c = new Context())
             {
-                return c.Categories.FirstOrDefault(x=>x.CategorUrl == url);
+                return c.Categories.FirstOrDefault(x => x.CategorUrl == url);
             }
         }
     }

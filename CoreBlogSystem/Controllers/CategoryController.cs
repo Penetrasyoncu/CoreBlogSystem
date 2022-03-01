@@ -5,8 +5,7 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreBlogSystem.Controllers
-{
-    [ValidateAntiForgeryToken]
+{    
     public class CategoryController : Controller
     {
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
