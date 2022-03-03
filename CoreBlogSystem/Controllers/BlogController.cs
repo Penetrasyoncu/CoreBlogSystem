@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAccessLayer.Concrete;
+using X.PagedList;
+using X.PagedList.Mvc.Core;
 
 namespace CoreBlogSystem.Controllers
 {
@@ -50,14 +52,14 @@ namespace CoreBlogSystem.Controllers
         }
 
         [Route("Blog/YazarinBloglari")]
-        public IActionResult BlogListByWriter()
+        public IActionResult BlogListByWriter(int page = 1)
         {
             //Burası Yazarın Yazdığı Yazılar ve Yazar Panelinde Listeliyoruz
             //Yazarın diğer yazıları dediğimiz blogların ındex sayfasında da aynı yapıyı kullanıyoruz.
             //var values = bm.GetBlogListByWriter(1);            
             var userMail = User.Identity.Name;
             var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
-            var values = bm.GetListCategoryWriter(WriterID);
+            var values = bm.GetListCategoryWriter(WriterID).ToPagedList(page, 5);
             return View(values);
         }
 
