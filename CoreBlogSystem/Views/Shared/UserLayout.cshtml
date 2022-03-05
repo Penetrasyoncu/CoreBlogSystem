@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Localization
+@using CoreBlogSystem.ExtensionMethods
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureList = ViewData["Cultures"] as List<SelectListItem>;
+}
+
+<!DOCTYPE html>
 <html lang="tr">
 
 <head>
@@ -33,7 +41,7 @@
             <div class="row">
                 <div class="col-md-4 logo text-left">
                     <a class="navbar-brand" href="/">
-                        <i class="fab fa-linode"></i> Kısmi Zamanlı Blogcu
+                        <i class="fab fa-linode"></i> Tekno Blog
                     </a>
                 </div>
                 @await Html.PartialAsync("Header/SıngLogin")
@@ -87,7 +95,7 @@
                                     <i class="fab fa-pinterest-p"></i>
                                     <span>Pinterest</span>
                                 </a>
-                            </li>
+                            </li>                            
                         </ul>
                     </div>
                 </div>
@@ -103,7 +111,7 @@
     </footer>
     <!---->
     <!-- js -->
-    <script src="~/CoreBlogTemplate/js/jquery-2.2.3.min.js"></script>    
+    <script src="~/CoreBlogTemplate/js/jquery-2.2.3.min.js"></script>
     <script src="~/CoreBlogTemplate/js/move-top.js"></script>
     <script src="~/CoreBlogTemplate/js/easing.js"></script>
     <script src="~/js/sweetalert.min.js"></script>
