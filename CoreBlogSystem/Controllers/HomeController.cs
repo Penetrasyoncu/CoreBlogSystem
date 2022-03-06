@@ -1,4 +1,5 @@
 ﻿using CoreBlogSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,7 @@ namespace CoreBlogSystem.Controllers
         {
             _logger = logger;
         }
+        [AllowAnonymous]
         //Post işlemi ile site dilini set ettiğimiz için herhangi bir controller da aşağıda ki kodu yazsak yeterli olacak.
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)

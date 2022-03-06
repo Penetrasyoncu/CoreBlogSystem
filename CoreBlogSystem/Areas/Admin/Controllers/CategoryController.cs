@@ -74,6 +74,15 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult PassiveCategoryAdmin(Category category, int id)
+        {
+            var values = cm.GetById(id);
+            values.CategoryStatus = Enums.Status.Pasif;
+            category = values;
+            cm.TUpdate(category);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult DeleteCategoryAdmin(Category category, int id)
         {
             var values = cm.GetById(id);
