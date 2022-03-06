@@ -99,7 +99,7 @@ namespace CoreBlogSystem.Controllers
 
             if (results.IsValid)
             {
-                p.BlogStatus = true;
+                p.BlogStatus = Enums.Status.Aktif;
                 p.BlogCreateDate = DateTime.Now;
                 p.WriterID = WriterID;
                 if (string.IsNullOrEmpty(p.BlogUrl))
@@ -155,7 +155,7 @@ namespace CoreBlogSystem.Controllers
             var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             var values = bm.GetListCategoryWriter(WriterID);
             p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToLongDateString());
-            p.BlogStatus = true;
+            p.BlogStatus = Enums.Status.Aktif;
             p.WriterID = WriterID;
             bm.TUpdate(p);
             return RedirectToAction("BlogListByWriter");

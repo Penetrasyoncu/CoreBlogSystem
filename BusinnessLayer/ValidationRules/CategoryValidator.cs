@@ -15,8 +15,7 @@ namespace BusinnessLayer.ValidationRules
         {
             RuleFor(x => x.CategoryName).NotEmpty().WithMessage("{CategoryName} Kısmı Boş Geçilemez");
             RuleFor(x => x.CategoryDescription).NotEmpty().WithMessage("{CategoryName} Kısmı Boş Geçilemez");
-            RuleFor(x => x.CategoryName).MinimumLength(6).WithMessage("{CategoryName} En Az 50 Karakter Olmalıdır");
-            RuleFor(x => x.CategoryDescription).MinimumLength(6).WithMessage("{CategoryDescription} En Az 50 Karakter Olmalıdır");
+            RuleFor(x => x.CategoryName).MinimumLength(6).WithMessage("{CategoryName} En Az 50 Karakter Olmalıdır");            
             //RuleFor(x => x.CategoryDescription).Must(IsTextValid).WithMessage("Girilen Kategori Açıklaması Geçerli Değil, Lütfen Sadece Metin Giriniz");
             //RuleFor(x => x.CategoryName).Must(IsTextValid).WithMessage("Girilen Kategori Açıklaması Geçerli Değil, Lütfen Sadece Metin Giriniz");
         }

@@ -1,0 +1,43 @@
+﻿@model EntityLayer.Concrete.Category
+
+@{
+    ViewData["Title"] = "Kategori Düzenle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("EditCategoryAdmin", "Category", FormMethod.Post))
+{
+    @Html.HiddenFor(x=>x.CategoryID, new{@class = "form-control"})
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="CategoryName">Kategori Adı</label>
+            @Html.TextBoxFor(x=>x.CategoryName, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="CategoryDescription">Kategori Açıklaması</label>
+            @Html.TextAreaFor(x=>x.CategoryDescription, 10, 3, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="CategorUrl">Kategori URL</label>
+            @Html.TextBoxFor(x=>x.CategorUrl, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="CategoryID">Durumu</label>            
+            @Html.DropDownListFor(w => w.CategoryStatus, new SelectList(new[] { new { Value = 1 , Text = "Aktif" }, new { Value = 2, Text = "Pasif" }, }, "Value", "Text"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-row">
+        <button type="submit" class="btn btn-info">Kategori Güncelle</button>
+    </div>
+}
+<script src="~/js/jquery-3.6.0.min.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script>
+    var Icerik = CKEDITOR.replace('CategoryDescription');
+</script>

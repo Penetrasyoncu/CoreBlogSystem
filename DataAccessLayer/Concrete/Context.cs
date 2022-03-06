@@ -58,7 +58,7 @@ namespace DataAccessLayer.Concrete
                     BlogThumbnailImage = "Thumbnail",
                     BlogImage = "/CoreBlogTemplate/images/1.jpg",
                     BlogCreateDate = DateTime.Now,
-                    BlogStatus = true,
+                    BlogStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
                     CategoryID = 1,
                     WriterID = 1,
                     BlogUrl = "first-blog"
@@ -70,7 +70,7 @@ namespace DataAccessLayer.Concrete
                     CategoryID = 1,
                     CategoryName = "First Category",
                     CategoryDescription = "First Category",
-                    CategoryStatus = true,
+                    CategoryStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
                     CategorUrl = "first-category"
                 });
         }

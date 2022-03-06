@@ -120,4 +120,16 @@
   <data name="LB_WELCOME" xml:space="preserve">
     <value>Hoşgeldiniz.</value>
   </data>
+  <data name="Menu_AboutUs" xml:space="preserve">
+    <value>Hakkımızda</value>
+  </data>
+  <data name="Menu_Blogs" xml:space="preserve">
+    <value>Bloglar</value>
+  </data>
+  <data name="Menu_Contact" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="Menu_HomePage" xml:space="preserve">
+    <value>Anasayfa</value>
+  </data>
 </root>

@@ -21,12 +21,7 @@ namespace CoreBlogSystem.Controllers
         {
             _logger = logger;
         }
-
-        public IActionResult Index()
-        {           
-            return View();
-        }
-
+        //Post işlemi ile site dilini set ettiğimiz için herhangi bir controller da aşağıda ki kodu yazsak yeterli olacak.
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
@@ -38,6 +33,11 @@ namespace CoreBlogSystem.Controllers
 
             return LocalRedirect(returnUrl);
         }
+
+        public IActionResult Index()
+        {           
+            return View();
+        }        
 
         public IActionResult Privacy()
         {

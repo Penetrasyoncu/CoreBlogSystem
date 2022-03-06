@@ -29,9 +29,9 @@ namespace CoreBlogSystem.Controllers
             {
                 p.CategorUrl = Tool.CreateUrlSlug(p.CategoryName);
             }
-            p.CategoryStatus = true;
+            p.CategoryStatus = Enums.Status.Aktif;
             cm.TAdd(p);
             return View();
-        }
+        }        
     }
 }

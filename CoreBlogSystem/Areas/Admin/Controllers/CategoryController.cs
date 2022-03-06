@@ -2,11 +2,13 @@
 using BusinnessLayer.ValidationRules;
 using CoreBlogSystem.Helpers;
 using CoreBlogSystem.Models;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -45,12 +47,12 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
 
             if (results.IsValid)
             {
-                category.CategoryStatus = true;
+                category.CategoryStatus = Enums.Status.Aktif;
                 if (string.IsNullOrEmpty(category.CategorUrl))
                 {
                     category.CategorUrl = Tool.CreateUrlSlug(category.CategoryName);
                 }
-                cm.TAdd(category);                
+                cm.TAdd(category);
                 return RedirectToAction("Index", "Category");
             }
             else
@@ -60,7 +62,40 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
-            return View();            
+            return View();
+        }
+
+        public IActionResult ActiveCategoryAdmin(Category category, int id)
+        {
+            var values = cm.GetById(id);
+            values.CategoryStatus = Enums.Status.Aktif;
+            category = values;
+            cm.TUpdate(category);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteCategoryAdmin(Category category, int id)
+        {
+            var values = cm.GetById(id);
+            values.CategoryStatus = Enums.Status.Silinmis;
+            category = values;
+            cm.TUpdate(category);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult EditCategoryAdmin(int id)
+        {
+
+            var EditCategoryValue = cm.GetById(id);
+            return View(EditCategoryValue);
+        }
+
+        [HttpPost]
+        public IActionResult EditCategoryAdmin(Category category)
+        {
+            cm.TUpdate(category);
+            return RedirectToAction("Index");
         }
     }
 }
