@@ -82,13 +82,21 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult DeleteCategoryAdmin(Category category, int id)
+        [HttpPost]
+        public JsonResult DeleteCategoryAdmin(Category category, int id)
         {
-            var values = cm.GetById(id);
-            values.CategoryStatus = Enums.Status.Silinmis;
-            category = values;
-            cm.TUpdate(category);
-            return RedirectToAction("Index");
+            try
+            {
+                var values = cm.GetById(id);
+                values.CategoryStatus = Enums.Status.Silinmis;
+                category = values;
+                cm.TUpdate(category);
+                return Json(true);
+            }
+            catch (Exception)
+            {
+                return Json(false);
+            }
         }
 
         [HttpGet]

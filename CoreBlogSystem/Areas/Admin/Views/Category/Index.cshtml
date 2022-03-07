@@ -33,7 +33,8 @@
                 {
                     <td><a href="/Admin/Category/PassiveCategoryAdmin/@item.CategoryID" class="btn btn-warning">Pasif Yap</a></td>
                 }
-                <td><a href="/Admin/Category/DeleteCategoryAdmin/@item.CategoryID" onclick="return confirm('Bağlı Kategoriler Olabilir, Silmek İstediğinizden Emin Misiniz?')" class="btn btn-danger">Sil</a></td>
+                @*<td><a href="/Admin/Category/DeleteCategoryAdmin/@item.CategoryID" onclick="return confirm('Bağlı Kategoriler Olabilir, Silmek İstediğinizden Emin Misiniz?')" class="btn btn-danger">Sil</a></td>*@
+                <td><button class="btn btn-danger" onclick="remove(@item.CategoryID);">Sil</button></td>
                 <td><a href="/Admin/Category/EditCategoryAdmin/@item.CategoryID" class="btn btn-success">Düzenle</a></td>
             </tr>
         }
@@ -43,3 +44,45 @@
 <br />
 <br />
 @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new { page }))
+
+<script src="~/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/sweetalert.min.js"></script>
+<script type="text/javascript">
+    function remove(CategoryID) {        
+        swal({
+            title: "Silinsin Mi?",
+            text: "DİKKAT!, Bağlı Yazılar Varsa Görüntülenmeyebilir",
+            icon: "error",
+            buttons: true,            
+            dangerMode: true,             
+        })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type: "POST",
+                data: {
+                    id: CategoryID
+                },
+                url: "/Admin/Category/DeleteCategoryAdmin",
+                dataType: "json",
+                success: function (response) {
+                    swal("Tebrikler! Kayıt Başarılı Bir Şekilde Silinmiştir!", {
+                        icon: "success",
+                    }).then(function () {
+                        window.location.href = "/Admin/Category/Index"
+                    });
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+        else {            
+            swal("Silinemedi", "Kayıt Silinemedi", "info");
+        }
+    });
+    }
+</script>
