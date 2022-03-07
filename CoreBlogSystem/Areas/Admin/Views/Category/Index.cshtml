@@ -33,7 +33,7 @@
                 {
                     <td><a href="/Admin/Category/PassiveCategoryAdmin/@item.CategoryID" class="btn btn-warning">Pasif Yap</a></td>
                 }
-                <td><a href="/Admin/Category/DeleteCategoryAdmin/@item.CategoryID" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Admin/Category/DeleteCategoryAdmin/@item.CategoryID" onclick="return confirm('Bağlı Kategoriler Olabilir, Silmek İstediğinizden Emin Misiniz?')" class="btn btn-danger">Sil</a></td>
                 <td><a href="/Admin/Category/EditCategoryAdmin/@item.CategoryID" class="btn btn-success">Düzenle</a></td>
             </tr>
         }
