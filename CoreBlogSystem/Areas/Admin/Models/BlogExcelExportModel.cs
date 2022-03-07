@@ -9,5 +9,9 @@ namespace CoreBlogSystem.Areas.Admin.Models
     {
         public int ID { get; set; }
         public string BlogName { get; set; }
+        public string BlogContent { get; set; }
+        public int BlogStatus { get; set; }
+        public DateTime BlogCreateDate { get; set; }
+        public string BlogUrl { get; set; }
     }
 }

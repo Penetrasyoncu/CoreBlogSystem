@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<EntityLayer.Concrete.Blog>
-<div class="tech-btm">    
+<div class="tech-btm">
     @foreach (var item in Model)
     {
         <div class="blog-grids row mb-3">
@@ -11,6 +11,7 @@
             <div class="col-md-7 blog-grid-right">
                 <h5>
                     <a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle</a>
+                    @*<a href="/Blog/@item.Category.CategorUrl/@item.BlogUrl">@item.BlogTitle</a>*@
                 </h5>
                 <div class="sub-meta">
                     <span>
