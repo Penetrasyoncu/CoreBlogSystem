@@ -11,6 +11,8 @@ namespace BusinnessLayer.Reports
 {
     public class ExcelReports<T>
     {
+        //Burada Excel Raporu Alabilmek İçin Generic Bir Fonksiyon Oluşturduk.
+        //Bu generic yapıda Export fonksiyonunun içerisine Entitylerimizi gönderiyor ve excel çıktısı almasını söylüyoruz.
         public static byte[] Export(List<T> items)
         {
             using (var workBook = new XLWorkbook())
