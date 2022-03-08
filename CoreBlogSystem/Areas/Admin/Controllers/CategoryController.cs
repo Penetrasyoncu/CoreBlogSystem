@@ -1,4 +1,5 @@
 ﻿using BusinnessLayer.Concrete;
+using BusinnessLayer.Reports;
 using BusinnessLayer.ValidationRules;
 using CoreBlogSystem.Helpers;
 using CoreBlogSystem.Models;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using X.PagedList;
@@ -112,6 +114,13 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
         {
             cm.TUpdate(category);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Export()
+        {
+            var content = ExcelReports<Category>.Export(cm.GetList());
+                
+            return File(content, "application / vnd.openxmlformats-officedocument.spreadsheetml.sheet", "KategoriListesi.xlsx");
         }
     }
 }
