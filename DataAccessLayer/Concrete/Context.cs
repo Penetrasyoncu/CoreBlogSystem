@@ -1,5 +1,7 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,79 @@ namespace DataAccessLayer.Concrete
 {
     public class Context : DbContext
     {
-        /*Burası Veritabanına bağlandığımız alan. Aşağıdaki bağlantı cümlesi ile veritabanı oluşturuyor ya da bağlanıyoruz*/
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public Context(DbContextOptions<Context> options) : base(options)
         {
-            optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=CoreBlogDb;integrated security=true;");
+        }
+
+        /*Burası Veritabanına bağlandığımız alan. Aşağıdaki bağlantı cümlesi ile veritabanı oluşturuyor ya da bağlanıyoruz*/
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=CoreBlogDb;integrated security=true;");
+        //}
+
+        public static class DataSeeding
+        {
+            public static void Seed(IApplicationBuilder application)
+            {
+                var scope = application.ApplicationServices.CreateScope();
+                var context = scope.ServiceProvider.GetService<Context>();
+                context.Database.Migrate();
+
+                if (context.Categories.Count() == 0)
+                {
+                    context.Categories.AddRange(
+                        new List<Category>() {
+                         new Category()
+                         {   CategoryID = 1,
+                             CategoryName = "First Category",
+                             CategoryDescription = "First Category Description",
+                             CategorUrl = "first-category",
+                             CategoryStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif
+                         }
+                         });
+                }
+                context.SaveChanges();
+
+                if (context.Blogs.Count() == 0)
+                {
+                    context.Blogs.AddRange(
+                        new List<Blog>() {
+                         new Blog()
+                         {
+                             BlogID = 1,
+                             BlogTitle = "FirstBlog",
+                             BlogContent = "FirsBlogLorem, FirsBlogLorem ,FirsBlogLorem",
+                             BlogThumbnailImage = "Thumbnail",
+                             BlogImage = "/CoreBlogTemplate/images/1.jpg",
+                             BlogCreateDate = DateTime.Now,
+                             BlogUrl = "first-blog",
+                             BlogStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
+                             CategoryID = 1,
+                             WriterID = 1
+                         }
+                         });
+                }
+                context.SaveChanges();
+
+                if (context.Writers.Count() == 0)
+                {
+                    context.Writers.AddRange(
+                        new List<Writer>() {
+                         new Writer()
+                         {
+                            WriterID = 1,
+                            WriterName = "AdminTeknoBlog",
+                            WriterAbout = ".Net CORE MVC - İbrahim OKUYUCU / Full-Stack Developer",
+                            WriterMail = "ibrahimokuyucuasg@hotmail.com",
+                            WriterPassword = "Admin123aA!",
+                            WriterStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
+                            WriterAddDate = DateTime.Now,
+                            WriterImage = "/CoreBlogTemplate/images/t1.jpg"
+                         }
+                         });
+                }
+                context.SaveChanges();
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,44 +106,6 @@ namespace DataAccessLayer.Concrete
                 .WithMany(y => y.WriterReceiver)
                 .HasForeignKey(z => z.ReceiverID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
-
-            modelBuilder.Entity<Writer>().HasData(
-                new Writer
-                {
-                    WriterID = 1,
-                    WriterName = "Admin",
-                    WriterAbout = "FirstUser",
-                    WriterImage = "/CoreBlogTemplate/images/t1.jpg",
-                    WriterMail = "test@test.com",
-                    WriterPassword = "123",
-                    WriterStatus = true,
-                    WriterAddDate = DateTime.Now
-                });
-
-            modelBuilder.Entity<Blog>().HasData(
-                new Blog
-                {
-                    BlogID = 1,
-                    BlogTitle = "FirstBlog",
-                    BlogContent = "FirsBlogLorem, FirsBlogLorem ,FirsBlogLorem",
-                    BlogThumbnailImage = "Thumbnail",
-                    BlogImage = "/CoreBlogTemplate/images/1.jpg",
-                    BlogCreateDate = DateTime.Now,
-                    BlogStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
-                    CategoryID = 1,
-                    WriterID = 1,
-                    BlogUrl = "first-blog"
-                });
-
-            modelBuilder.Entity<Category>().HasData(
-                new Category
-                {
-                    CategoryID = 1,
-                    CategoryName = "First Category",
-                    CategoryDescription = "First Category",
-                    CategoryStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
-                    CategorUrl = "first-category"
-                });
         }
         /*Aşağıdaki Tanımladığımız DBSET' ler veritabanına açılacak tablolarımızın isimleri
          Burada DBSET türünde Entity katmanından referans alarak oluşturduğumuz sınıflar veritabanına yukarıdaki

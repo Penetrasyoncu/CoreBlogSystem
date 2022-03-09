@@ -1,4 +1,5 @@
 using CoreBlogSystem.Utilities;
+using DataAccessLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +17,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using static DataAccessLayer.Concrete.Context;
 
 namespace CoreBlogSystem
 {
@@ -70,6 +73,9 @@ namespace CoreBlogSystem
                 options.SupportedUICultures = supportedCultures;
             });
 
+            services.AddDbContext<Context>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("CoreBlogDbConnection")));
+            services.AddControllersWithViews();
 
             services.AddSingleton<SharedViewLocalizer>();
         }
@@ -83,6 +89,7 @@ namespace CoreBlogSystem
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                DataSeeding.Seed(app);
             }
             else
             {

@@ -12,12 +12,14 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfCategoryRepository : GenericRepository<Category>, ICategoryDal
     {
+        private readonly Context _context;
+        public EfCategoryRepository(Context context) : base(context)
+        {
+            _context = context;
+        }
         public Category GetCategoryByUrl(string url)
         {
-            using (var c = new Context())
-            {
-                return c.Categories.FirstOrDefault(x => x.CategorUrl == url);
-            }
+            return _context.Categories.FirstOrDefault(x => x.CategorUrl == url);
         }
     }
 }

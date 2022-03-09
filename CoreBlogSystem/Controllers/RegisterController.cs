@@ -29,7 +29,7 @@ namespace CoreBlogSystem.Controllers
 
             if (results.IsValid)
             {
-                p.WriterStatus = true;
+                p.WriterStatus = Helpers.Enums.Status.Aktif;
                 p.WriterAbout = "İlk Yazar İbrahim";
                 p.WriterAddDate = DateTime.Now;
 

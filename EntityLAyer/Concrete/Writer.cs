@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CoreBlogSystem.Helpers.Enums;
 
 namespace EntityLayer.Concrete
 {
@@ -16,7 +17,7 @@ namespace EntityLayer.Concrete
         public string WriterImage { get; set; }
         public string WriterMail { get; set; }
         public string WriterPassword { get; set; }
-        public bool WriterStatus { get; set; }
+        public Status WriterStatus { get; set; }
         public DateTime WriterAddDate { get; set; }
         public List<Blog> Blogs { get; set; }
 

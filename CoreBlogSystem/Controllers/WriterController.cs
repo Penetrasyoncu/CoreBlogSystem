@@ -22,9 +22,14 @@ namespace CoreBlogSystem.Controllers
     //Böylece aşağısında kalan tüm actionlara yetkisiz erişimi engelleyeceğiz.
     //Kullanıcı bilgileri ile giriş yapmayan kimse aşağıdaki actionlara erişemeyecek.
 
-    [AllowAnonymous]    
+    [AllowAnonymous]
     public class WriterController : Controller
     {
+        private readonly Context _context;
+        public WriterController(Context context)
+        {
+            _context = context;
+        }
         WriterManager wm = new WriterManager(new EfWriterRepository());
 
         public IActionResult Index()
@@ -34,14 +39,13 @@ namespace CoreBlogSystem.Controllers
             return View();
         }
 
-        
+
         //Şuan da 1 ID' li yazarın bilgilerini güncelliyoruz. Giriş yapanın ki olacak
         [HttpGet]
         public IActionResult WriterEditProfile()
         {
-            Context c = new Context();
             var userMail = User.Identity.Name;
-            var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var WriterID = _context.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             var writerValues = wm.TGetById(WriterID);
             return View(writerValues);
         }
@@ -93,7 +97,7 @@ namespace CoreBlogSystem.Controllers
             w.WriterMail = p.WriterMail;
             w.WriterName = p.WriterName;
             w.WriterPassword = p.WriterPassword;
-            w.WriterStatus = true;
+            w.WriterStatus = Helpers.Enums.Status.Aktif;
             w.WriterAbout = p.WriterAbout;
             w.WriterAddDate = DateTime.Now;
 
