@@ -43,10 +43,6 @@
 <a href="/Admin/Category/AddCategoryAdmin" class="btn btn-primary">Yeni Kategori Ekle</a>
 <br />
 <br />
-<a href="/Admin/Category/Export" class="btn btn-primary">Kategori Excel Listesini İndir</a>
-<br />
-<br />
-
 @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new { page }))
 
 <script src="~/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
