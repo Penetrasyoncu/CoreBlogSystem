@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220219153633_CategoryUrl")]
-    partial class CategoryUrl
+    [Migration("20220310121440_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,36 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Abouts");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Admin", b =>
+                {
+                    b.Property<int>("AdminID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdminID");
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Blog", b =>
                 {
                     b.Property<int>("BlogID")
@@ -67,8 +97,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("BlogImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("BlogStatus")
-                        .HasColumnType("bit");
+                    b.Property<int>("BlogStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("BlogThumbnailImage")
                         .HasColumnType("nvarchar(max)");
@@ -134,8 +164,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("CategoryStatus")
-                        .HasColumnType("bit");
+                    b.Property<int>("CategoryStatus")
+                        .HasColumnType("int");
 
                     b.HasKey("CategoryID");
 

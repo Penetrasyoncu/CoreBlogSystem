@@ -35,44 +35,44 @@ namespace DataAccessLayer.Concrete
                 .WithMany(y => y.WriterReceiver)
                 .HasForeignKey(z => z.ReceiverID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+            
+            //modelBuilder.Entity<Writer>().HasData(
+            //    new Writer
+            //    {
+            //        WriterID = 1,
+            //        WriterName = "İbrahim OKUYUCU",
+            //        WriterAbout = "FirstUser",
+            //        WriterImage = "/CoreBlogTemplate/images/t1.jpg",
+            //        WriterMail = "ibrahim@ibrahim.com",
+            //        WriterPassword = "123",
+            //        WriterStatus = true,
+            //        WriterAddDate = DateTime.Now
+            //    });
 
-            modelBuilder.Entity<Writer>().HasData(
-                new Writer
-                {
-                    WriterID = 1,
-                    WriterName = "Admin",
-                    WriterAbout = "FirstUser",
-                    WriterImage = "/CoreBlogTemplate/images/t1.jpg",
-                    WriterMail = "test@test.com",
-                    WriterPassword = "123",
-                    WriterStatus = true,
-                    WriterAddDate = DateTime.Now
-                });
+            //modelBuilder.Entity<Blog>().HasData(
+            //    new Blog
+            //    {
+            //        BlogID = 1,
+            //        BlogTitle = "Yazılım Nedir ?",
+            //        BlogContent = "Yazılım Açıklama",
+            //        BlogThumbnailImage = "Thumbnail",
+            //        BlogImage = "/CoreBlogTemplate/images/1.jpg",
+            //        BlogCreateDate = DateTime.Now,
+            //        BlogStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
+            //        CategoryID = 1,
+            //        WriterID = 1,
+            //        BlogUrl = "yazilim-nedir"
+            //    });
 
-            modelBuilder.Entity<Blog>().HasData(
-                new Blog
-                {
-                    BlogID = 1,
-                    BlogTitle = "FirstBlog",
-                    BlogContent = "FirsBlogLorem, FirsBlogLorem ,FirsBlogLorem",
-                    BlogThumbnailImage = "Thumbnail",
-                    BlogImage = "/CoreBlogTemplate/images/1.jpg",
-                    BlogCreateDate = DateTime.Now,
-                    BlogStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
-                    CategoryID = 1,
-                    WriterID = 1,
-                    BlogUrl = "first-blog"
-                });
-
-            modelBuilder.Entity<Category>().HasData(
-                new Category
-                {
-                    CategoryID = 1,
-                    CategoryName = "First Category",
-                    CategoryDescription = "First Category",
-                    CategoryStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
-                    CategorUrl = "first-category"
-                });
+            //modelBuilder.Entity<Category>().HasData(
+            //    new Category
+            //    {
+            //        CategoryID = 1,
+            //        CategoryName = "Yazılım",
+            //        CategoryDescription = "Yazılım Açıklama",
+            //        CategoryStatus = CoreBlogSystem.Helpers.Enums.Status.Aktif,
+            //        CategorUrl = "yazilim"
+            //    });
         }
         /*Aşağıdaki Tanımladığımız DBSET' ler veritabanına açılacak tablolarımızın isimleri
          Burada DBSET türünde Entity katmanından referans alarak oluşturduğumuz sınıflar veritabanına yukarıdaki
@@ -91,5 +91,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Message2> Message2 { get; set; }
+        public DbSet<Admin> Admins { get; set; }
     }
 }

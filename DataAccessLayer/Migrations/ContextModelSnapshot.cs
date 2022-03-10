@@ -49,6 +49,36 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Abouts");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Admin", b =>
+                {
+                    b.Property<int>("AdminID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdminID");
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Blog", b =>
                 {
                     b.Property<int>("BlogID")
@@ -65,8 +95,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("BlogImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("BlogStatus")
-                        .HasColumnType("bit");
+                    b.Property<int>("BlogStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("BlogThumbnailImage")
                         .HasColumnType("nvarchar(max)");
@@ -90,21 +120,6 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("WriterID");
 
                     b.ToTable("Blogs");
-
-                    b.HasData(
-                        new
-                        {
-                            BlogID = 1,
-                            BlogContent = "FirsBlogLorem, FirsBlogLorem ,FirsBlogLorem",
-                            BlogCreateDate = new DateTime(2022, 2, 23, 13, 19, 54, 577, DateTimeKind.Local).AddTicks(8238),
-                            BlogImage = "/CoreBlogTemplate/images/1.jpg",
-                            BlogStatus = true,
-                            BlogThumbnailImage = "Thumbnail",
-                            BlogTitle = "FirstBlog",
-                            BlogUrl = "first-blog",
-                            CategoryID = 1,
-                            WriterID = 1
-                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.BlogRating", b =>
@@ -147,22 +162,12 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("CategoryStatus")
-                        .HasColumnType("bit");
+                    b.Property<int>("CategoryStatus")
+                        .HasColumnType("int");
 
                     b.HasKey("CategoryID");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryID = 1,
-                            CategorUrl = "first-category",
-                            CategoryDescription = "First Category",
-                            CategoryName = "First Category",
-                            CategoryStatus = true
-                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.City", b =>
@@ -421,19 +426,6 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("WriterID");
 
                     b.ToTable("Writers");
-
-                    b.HasData(
-                        new
-                        {
-                            WriterID = 1,
-                            WriterAbout = "FirstUser",
-                            WriterAddDate = new DateTime(2022, 2, 23, 13, 19, 54, 573, DateTimeKind.Local).AddTicks(3108),
-                            WriterImage = "/CoreBlogTemplate/images/t1.jpg",
-                            WriterMail = "test@test.com",
-                            WriterName = "Admin",
-                            WriterPassword = "123",
-                            WriterStatus = true
-                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Blog", b =>
