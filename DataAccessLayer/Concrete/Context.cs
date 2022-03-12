@@ -35,7 +35,7 @@ namespace DataAccessLayer.Concrete
                 .WithMany(y => y.WriterReceiver)
                 .HasForeignKey(z => z.ReceiverID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
-            
+
             //modelBuilder.Entity<Writer>().HasData(
             //    new Writer
             //    {
@@ -74,6 +74,7 @@ namespace DataAccessLayer.Concrete
             //        CategorUrl = "yazilim"
             //    });
         }
+
         /*Aşağıdaki Tanımladığımız DBSET' ler veritabanına açılacak tablolarımızın isimleri
          Burada DBSET türünde Entity katmanından referans alarak oluşturduğumuz sınıflar veritabanına yukarıdaki
         connectionstringimizi kullanarak açacak tablolarımızı*/

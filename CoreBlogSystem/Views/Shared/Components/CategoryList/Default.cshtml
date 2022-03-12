@@ -1,13 +1,16 @@
-﻿@model IEnumerable<EntityLayer.Concrete.Category>
+﻿@using DataAccessLayer.Concrete
+@model IEnumerable<EntityLayer.Concrete.Category>
 <div class="tech-btm">
     <h4>Kategoriler</h4>
 
     <ul class="list-group single">
         @foreach (var item in Model)
-        {            
+        {
+            Context c = new Context();
+            var catCount = c.Categories.Where(x => x.CategoryID == item.CategoryID).Select(x => x.Blogs.Count()).FirstOrDefault();
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <a href="/Blog/@item.CategorUrl">@item.CategoryName</a>
-                <span class="badge badge-primary badge-pill">@item.CategoryID</span>
+                <span class="badge badge-primary badge-pill">@catCount</span>
             </li>
         }
     </ul>

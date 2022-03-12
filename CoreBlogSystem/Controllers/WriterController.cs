@@ -35,7 +35,7 @@ namespace CoreBlogSystem.Controllers
         }
 
         
-        //Şuan da 1 ID' li yazarın bilgilerini güncelliyoruz. Giriş yapanın ki olacak
+        //Giriş Yapan yazarın bilgilerini güncelliyoruz. Giriş yapanın ki olacak
         [HttpGet]
         public IActionResult WriterEditProfile()
         {
