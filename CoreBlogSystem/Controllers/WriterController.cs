@@ -93,7 +93,7 @@ namespace CoreBlogSystem.Controllers
             w.WriterMail = p.WriterMail;
             w.WriterName = p.WriterName;
             w.WriterPassword = p.WriterPassword;
-            w.WriterStatus = true;
+            w.WriterStatus = Helpers.Enums.Status.Aktif;
             w.WriterAbout = p.WriterAbout;
             w.WriterAddDate = DateTime.Now;
 

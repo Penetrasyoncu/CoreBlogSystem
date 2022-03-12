@@ -50,9 +50,9 @@ namespace CoreBlogSystem.Helpers
             };
         }
 
-        public static SweetAlert SweetAlert_Success(string title, string text)
+        public static AlertModel SweetAlert_Success(string title, string text)
         {
-            return new SweetAlert
+            return new AlertModel
             {
                 title = title,
                 text = text,
@@ -60,9 +60,9 @@ namespace CoreBlogSystem.Helpers
             };
         }
 
-        public static SweetAlert SweetAlert_Warning(string title, string text)
+        public static AlertModel SweetAlert_Warning(string title, string text)
         {
-            return new SweetAlert
+            return new AlertModel
             {
                 title = title,
                 text = text,
@@ -70,9 +70,9 @@ namespace CoreBlogSystem.Helpers
             };
         }
 
-        public static SweetAlert SweetAlert_Error(string title, string text)
+        public static AlertModel SweetAlert_Error(string title, string text)
         {
-            return new SweetAlert
+            return new AlertModel
             {
                 title = title,
                 text = text,
@@ -80,9 +80,9 @@ namespace CoreBlogSystem.Helpers
             };
         }
 
-        public static SweetAlert SweetAlert_Info(string title, string text)
+        public static AlertModel SweetAlert_Info(string title, string text)
         {
-            return new SweetAlert
+            return new AlertModel
             {
                 title = title,
                 text = text,

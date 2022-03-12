@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<EntityLayer.Concrete.Blog>
 @{
     //ViewData["Title"] = ViewBag.CategorName + " " + "Ait Yazılar";
-    ViewData["Title"] = "Ait Yazılar";
+    ViewData["Title"] = ViewBag.CategoryName + "Ait Yazılar";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
-
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 
 <section class="main-content-w3layouts-agileits">
     <div class="container">
@@ -24,7 +22,7 @@
                                 <ul class="blog-icons my-4">
                                     <li>
                                         <a href="#">
-                                            <i class="far fa-calendar-alt"></i>@Html.Raw((((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy")))
+                                            <i class="far fa-calendar-alt"></i>@Html.Raw((((DateTime)item.BlogCreateDate).ToString("dd MMM yyyy")))
                                         </a>
                                     </li>
                                     <li class="mx-2">

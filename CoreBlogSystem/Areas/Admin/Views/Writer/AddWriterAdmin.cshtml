@@ -1,0 +1,74 @@
+﻿@using CoreBlogSystem.Areas.Admin.Models
+@model AddWriterModel
+@{
+    ViewData["Title"] = "Yazar Ekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<form id="addForm" class="form-group" method="POST" action="AddWriterAdmin" enctype="multipart/form-data">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Eklenecek Yazarın Bilgileri</h4>
+                <br>
+                @Html.HiddenFor(x=>x.ID,  new {@class="form-control"})
+                <div class="forms-sample">
+                    <div class="form-group">
+                        <label for="Name">Yazar Adı</label>
+                        @Html.TextBoxFor(x=>x.Name,  new {@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="About">Yazar Hakkında</label>
+                        @Html.TextAreaFor(x=>x.About,  new {@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Yazar Mail Adresi</label>
+                        @Html.TextBoxFor(x=>x.Email,  new {@class="form-control" , @type = "email"})
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Yazar Şifre</label>
+                        @Html.PasswordFor(x=>x.Password,  new {@class="form-control"})
+                    </div>
+                    <button type="button" class="btn btn-gradient-primary mr-2" onclick="Add();">Kaydet</button>
+                    <button class="btn btn-light">İptal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/js/jquery-3.6.0.min.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script>
+    var About = CKEDITOR.replace('About');
+</script>
+
+<script>
+
+    function CKupdate(){
+    for ( instance in CKEDITOR.instances ){
+        CKEDITOR.instances[instance].updateElement();
+    }
+        CKEDITOR.instances[instance].setData('');
+    } 
+    function Add(){
+        var model = {
+            ID: $("#ID").val(),
+            Name: $("#Name").val(),
+            About: CKEDITOR.instances.About.getData(),
+            Email: $("#Email").val(),
+            Password: $("#Password").val()
+        }
+
+        $.post("/Admin/Writer/AddWriterAdmin", { addWriterModel : model }).done(function (result) {
+            if (result.isSuccess) {
+                toastr['success'](result.message, 'Başarılı');
+                $("#addForm")[0].reset();
+                CKupdate();
+            }
+            else
+            {
+                toastr['error'](result.message, 'Hata');
+            }
+        });
+    }
+</script>
