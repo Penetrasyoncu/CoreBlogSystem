@@ -85,11 +85,11 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteCategoryAdmin(Category category, int id)
+        public JsonResult DeleteCategoryAdmin(Category category, int categoryID)
         {
             try
             {
-                var values = cm.GetById(id);
+                var values = cm.GetById(categoryID);
                 values.CategoryStatus = Enums.Status.Silinmis;
                 category = values;
                 cm.TUpdate(category);

@@ -17,6 +17,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
+using X.PagedList.Mvc.Core;
+
 
 namespace CoreBlogSystem.Areas.Admin.Controllers
 {
@@ -25,9 +28,10 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
     {
         WriterManager writerManager = new WriterManager(new EfWriterRepository());
 
-        public IActionResult Index()
+        public IActionResult IndexWriterAdmin(int page = 1)
         {
-            return View();
+            var values = writerManager.TGetList().ToPagedList(page, 5);
+            return View(values);
         }
 
         [HttpGet]

@@ -1,0 +1,66 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using CoreBlogSystem.Helpers
+@model IPagedList<EntityLayer.Concrete.Writer>
+
+@{
+    ViewData["Title"] = "Tüm Yazarlar";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Tüm Yazarlar</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Yazar ID</th>
+                            <th>Yazar Adı</th>
+                            <th>Yazar Mail</th>
+                            <th>Durumu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.WriterID</td>
+                                <td>@item.WriterName</td>
+                                <td>@item.WriterMail</td>
+                                <td><span class="badge badge-primary">@Html.Raw(item.WriterStatus)</span></td>                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div> 
+            <a href="/Admin/Writer/AddWriterAdmin" class="btn btn-primary mt-2">Yeni Yazar Ekle</a>
+        </div>
+    </div>
+</div>
+
+@Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new { page }))
