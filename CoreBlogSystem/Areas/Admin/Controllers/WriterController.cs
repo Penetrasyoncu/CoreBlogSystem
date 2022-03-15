@@ -85,5 +85,19 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
                 return Json(retVal);
             }
         }
+
+        [HttpGet]
+        public IActionResult EditWriterAdmin(int id)
+        {
+            var EditCategoryValue = writerManager.TGetById(id);
+            return View(EditCategoryValue);
+        }
+
+        [HttpPost]
+        public IActionResult EditWriterAdmin(Writer writer)
+        {
+            writerManager.TUpdate(writer);
+            return RedirectToAction("Index");
+        }
     }
 }

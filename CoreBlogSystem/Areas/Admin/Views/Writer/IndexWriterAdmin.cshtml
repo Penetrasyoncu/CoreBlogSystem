@@ -42,10 +42,10 @@
                             <th>Yazar Adı</th>
                             <th>Yazar Mail</th>
                             <th>Durumu</th>
+                            <th>İşlemler</th>
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach (var item in Model)
                         {
                             <tr>
@@ -53,6 +53,7 @@
                                 <td>@item.WriterName</td>
                                 <td>@item.WriterMail</td>
                                 <td><span class="badge badge-primary">@Html.Raw(item.WriterStatus)</span></td>                                
+                                <td><a href="/Admin/Writer/EditWriterAdmin/@item.WriterID" class="btn btn-primary">Düzenle</a></td>                                
                             </tr>
                         }
                     </tbody>

@@ -29,6 +29,9 @@
                         <label for="Password">Yazar Şifre</label>
                         @Html.PasswordFor(x=>x.Password,  new {@class="form-control"})
                     </div>
+                    <div class="form-group">
+                        <input type="file" name="WriterImage" />
+                    </div>
                     <button type="button" class="btn btn-gradient-primary mr-2" onclick="Add();">Kaydet</button>
                     <button class="btn btn-light">İptal</button>
                 </div>
@@ -49,14 +52,15 @@
         CKEDITOR.instances[instance].updateElement();
     }
         CKEDITOR.instances[instance].setData('');
-    } 
+    }
     function Add(){
         var model = {
             ID: $("#ID").val(),
             Name: $("#Name").val(),
             About: CKEDITOR.instances.About.getData(),
             Email: $("#Email").val(),
-            Password: $("#Password").val()
+            Password: $("#Password").val(),
+            Image: $('input[type=file]').val()
         }
 
         $.post("/Admin/Writer/AddWriterAdmin", { addWriterModel : model }).done(function (result) {

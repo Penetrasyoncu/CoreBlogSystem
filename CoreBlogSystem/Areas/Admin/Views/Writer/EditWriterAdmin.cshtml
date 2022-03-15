@@ -1,0 +1,47 @@
+﻿@model EntityLayer.Concrete.Writer
+@{
+    ViewData["Title"] = "WriterEditProfile";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("EditWriterAdmin", "Writer", new { area = "Admin" }, FormMethod.Post))
+{
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yazar Bilgileri</h4>
+                <p class="card-description"> Tüm Bilgilerinizi Kontrol Edebilirsiniz</p>
+                <br>
+                @Html.HiddenFor(x=>x.WriterID,  new {@class="form-control"})
+                <form class="forms-sample">
+                    <div class="form-group">
+                        <label for="WriterName">Yazar Adı</label>
+                        @Html.TextBoxFor(x=>x.WriterName,  new {@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="WriterMail">Yazar Mail Adresi</label>
+                        @Html.TextBoxFor(x=>x.WriterMail,  new {@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="WriterPassword">Yazar Şifre</label>
+                        @Html.PasswordFor(x=>x.WriterPassword,  new {@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <input type="file" name="WriterImage" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputCity1">Yazar Hakkında</label>
+                        @Html.TextAreaFor(x=>x.WriterAbout,  10,3, new {@class="form-control"})
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">Güncelle</button>
+                    <button class="btn btn-light">İptal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/js/jquery-3.6.0.min.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script>
+    var Icerik = CKEDITOR.replace('WriterAbout');
+</script>
