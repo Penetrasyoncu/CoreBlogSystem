@@ -1,7 +1,10 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@model UserSignInViewModel
+@{
     ViewData["Title"] = "Giriş Yap";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+
 <section class="main-content-w3layouts-agileits">
     <div class="container">
         <h3 class="tittle">Oturum Aç</h3>
@@ -10,19 +13,19 @@
                 <form method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1 mb-2">E-Posta Adresi</label>
-                        <input type="email" name="WriterMail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-Mail Adresiniz" required="required">
-                        <small id="emailHelp" class="form-text text-muted">Mail Adreslerini Asla Kimseyle Paylaşmıyoruz</small>
+                        <input type="text" asp-for="@Model.UserName" class="form-control" placeholder="Kullanıcı Adınızı Giriniz">
+                        <small id="emailHelp" class="form-text text-muted">Kullanıcı Adınızı Asla Kimseyle Paylaşmıyoruz</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1 mb-2">Şifre</label>
-                        <input type="password" name="WriterPassword" class="form-control" id="exampleInputPassword1" placeholder="Şifreniz" required="required">
+                        <input type="password" asp-for="@Model.Password" class="form-control" placeholder="Şifreniz" required="required">
                     </div>
-                    <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="WriterPassword">
+                    <div class=" form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>
                     </div>
                     <button type="submit" class="btn btn-primary submit mb-4">Giriş Yap</button>
-                    <p><a href="/Register/Index"> Hesabınız Yok Mu?</a></p>
+                    <p><a href="/Account/Register"> Hesabınız Yok Mu?</a></p>
                 </form>
             </div>
         </div>
