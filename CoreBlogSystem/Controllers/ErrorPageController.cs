@@ -3,9 +3,11 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoreBlogSystem.Controllers
-{    
+{
+    [AllowAnonymous]
     public class ErrorPageController : Controller
     {
         public IActionResult ErrorName(int code)

@@ -1,13 +1,15 @@
 ﻿using BusinnessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace CoreBlogSystem.Controllers
 {    
+    [AllowAnonymous]
     public class NewsletterController : Controller
-    {
+    {        
         NewsletterManager nm = new NewsletterManager(new EfNewsletterRepository());
 
         [HttpGet]

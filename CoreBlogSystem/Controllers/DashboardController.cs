@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
 namespace CoreBlogSystem.Controllers
-{    
+{
     public class DashboardController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
@@ -25,7 +25,8 @@ namespace CoreBlogSystem.Controllers
             Context context = new Context();
             WriterManager wm = new WriterManager(new EfWriterRepository());
 
-            var userMail = User.Identity.Name;
+            var userName = User.Identity.Name;
+            var userMail = context.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var WriterID = context.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             var GetWriterId = wm.TGetById(WriterID);
 

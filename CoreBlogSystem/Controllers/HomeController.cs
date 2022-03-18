@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace CoreBlogSystem.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -22,7 +23,7 @@ namespace CoreBlogSystem.Controllers
         {
             _logger = logger;
         }
-        [AllowAnonymous]
+
         //Post işlemi ile site dilini set ettiğimiz için herhangi bir controller da aşağıda ki kodu yazsak yeterli olacak.
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
@@ -37,9 +38,9 @@ namespace CoreBlogSystem.Controllers
         }
 
         public IActionResult Index()
-        {           
+        {
             return View();
-        }        
+        }
 
         public IActionResult Privacy()
         {

@@ -21,8 +21,7 @@ namespace CoreBlogSystem.Controllers
     //[Authorize] attributesini Controller seviyesine yani en yukarıya çıkararak yapabiliriz.
     //Böylece aşağısında kalan tüm actionlara yetkisiz erişimi engelleyeceğiz.
     //Kullanıcı bilgileri ile giriş yapmayan kimse aşağıdaki actionlara erişemeyecek.
-
-    [AllowAnonymous]    
+    
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterRepository());
@@ -33,7 +32,6 @@ namespace CoreBlogSystem.Controllers
             ViewBag.v = usermail;
             return View();
         }
-
         
         //Giriş Yapan yazarın bilgilerini güncelliyoruz. Giriş yapanın ki olacak
         [HttpGet]
@@ -45,7 +43,6 @@ namespace CoreBlogSystem.Controllers
             var writerValues = wm.TGetById(WriterID);
             return View(writerValues);
         }
-
 
         [HttpPost]
         public IActionResult WriterEditProfile(Writer p)
