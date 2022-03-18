@@ -15,19 +15,21 @@ using X.PagedList;
 using X.PagedList.Mvc.Core;
 
 namespace CoreBlogSystem.Controllers
-{
-    [AllowAnonymous]    
+{     
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
         Context c = new Context();
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
 
+        [AllowAnonymous]
         [Route("Blog/{categoryUrl}/{blogUrl}")]
         public IActionResult BlogReadAll(string blogUrl)
         {
@@ -43,6 +45,7 @@ namespace CoreBlogSystem.Controllers
             }
         }
 
+        [AllowAnonymous]
         [Route("Blog/{categoryUrl}")]
         public IActionResult Category(string categoryUrl)
         {
