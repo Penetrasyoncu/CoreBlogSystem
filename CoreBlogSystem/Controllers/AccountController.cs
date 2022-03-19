@@ -88,7 +88,7 @@ namespace CoreBlogSystem.Controllers
                 var result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, true, true);
                 if (result.Succeeded)
                 {
-                    RedirectToAction("Index", "Dashboard");
+                    RedirectToAction("Index", "Admin");
                 }
                 else
                 {

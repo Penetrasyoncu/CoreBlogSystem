@@ -4,12 +4,13 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace CoreBlogSystem.Controllers
 {
-    [AllowAnonymous]    
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
         WriterManager vm = new WriterManager(new EfWriterRepository());
@@ -46,6 +47,6 @@ namespace CoreBlogSystem.Controllers
                 }
             }
             return View();
-        }       
+        }
     }
 }

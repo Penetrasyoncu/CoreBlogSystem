@@ -1,59 +1,57 @@
-﻿@model EntityLayer.Concrete.Writer
+﻿@model UserUpdateViewModel
 @{
     ViewData["Title"] = "WriterEditProfile";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
-@using (Html.BeginForm("WriterEditProfile", "Writer", FormMethod.Post))
-{
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Yazar Bilgileri</h4>
-                <p class="card-description"> Tüm Bilgilerinizi Kontrol Edebilirsiniz</p>
-                <br>
-                @Html.HiddenFor(x=>x.WriterID,  new {@class="form-control"})
-                <form class="forms-sample">                   
-                    <div class="form-group">
-                        <label for="WriterName">Yazar Adı</label>
-                        @Html.TextBoxFor(x=>x.WriterName,  new {@class="form-control"})
-                        @Html.ValidationMessageFor(x=>x.WriterName,"",new {@class = "text-danger"})
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yazar Bilgileri</h4>
+            <p class="card-description"> Tüm Bilgilerinizi Kontrol Edebilirsiniz</p>
+            <br>
+            <label>@ViewBag.Veri</label>
+            <form class="forms-sample" method="post">
+                <div class="form-group">
+                    <label for="NameSurnameModel">Yazar Adı</label>
+                    <input type="text" class="form-control" asp-for="@Model.NameSurnameModel" />
+                </div>
+                <div class="form-group">
+                    <label for="UserNameModel">Kullanıcı Adı</label>
+                    <input type="text" class="form-control" asp-for="@Model.UserNameModel" />
+                </div>
+                <div class="form-group">
+                    <label for="MailModel">Yazar Mail Adresi</label>
+                    <input type="text" class="form-control" asp-for="@Model.MailModel" />
+                </div>
+                <div class="form-group">
+                    <label for="WriterPassword">Yazar Şifre</label>
+                    <input type="text" class="form-control" asp-for="@Model.PasswordModel" />
+                </div>
+                @*<div class="form-group">
+                    <label>Profil Resmi</label>
+                    <input type="file" name="img[]" class="file-upload-default">
+                    @*<div class="input-group col-xs-12">
+                    <input type="text" class="form-control file-upload-info" disabled placeholder="Profil Resmi Seç">
+                    <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-gradient-primary" type="button">Resim Seç</button>
+                    </span>
                     </div>
-                    <div class="form-group">
-                        <label for="WriterMail">Yazar Mail Adresi</label>
-                        @Html.TextBoxFor(x=>x.WriterMail,  new {@class="form-control"})
-                        @Html.ValidationMessageFor(x=>x.WriterMail,"",new {@class = "text-danger"})
-                    </div>
-                    <div class="form-group">
-                        <label for="WriterPassword">Yazar Şifre</label>
-                        @Html.PasswordFor(x=>x.WriterPassword,  new {@class="form-control"})
-                        @Html.ValidationMessageFor(x=>x.WriterPassword,"",new {@class = "text-danger"})
-                    </div>
-                    @*<div class="form-group">
-                        <label>Profil Resmi</label>
-                        <input type="file" name="img[]" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Profil Resmi Seç">
-                        <span class="input-group-append">
-                        <button class="file-upload-browse btn btn-gradient-primary" type="button">Resim Seç</button>
-                        </span>
-                        </div>
-                        </div>*@
-                    <input type="file" name="WriterImage" />
-                    <div class="form-group">
-                        <label for="exampleInputCity1">Yazar Hakkında</label>
-                        @Html.TextAreaFor(x=>x.WriterAbout,  10,3, new {@class="form-control"})
-                        @Html.ValidationMessageFor(x=>x.WriterAbout,"",new {@class = "text-danger"})
-                    </div>
-                    <button type="submit" class="btn btn-gradient-primary mr-2">Güncelle</button>
-                    <button class="btn btn-light">İptal</button>
-                </form>
-            </div>
+                    </div>*@
+                @*<input type="file" name="WriterImage" />*@
+                <div class="form-group">
+                    <label for="exampleInputCity1">Yazar Resim</label>
+                    @Html.TextAreaFor(x=>x.ImageURLModel,  10,3, new {@class="form-control"})
+                </div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Güncelle</button>
+                <button class="btn btn-light">İptal</button>
+            </form>
         </div>
     </div>
-}
+</div>
+
 <script src="~/js/jquery-3.6.0.min.js"></script>
 <script src="~/ckeditor/ckeditor.js"></script>
 <script>
-    var Icerik = CKEDITOR.replace('WriterAbout');    
+    var Icerik = CKEDITOR.replace('ImageURLModel');
 </script>

@@ -15,7 +15,7 @@ using X.PagedList;
 using X.PagedList.Mvc.Core;
 
 namespace CoreBlogSystem.Controllers
-{     
+{
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
@@ -60,7 +60,8 @@ namespace CoreBlogSystem.Controllers
             //Burası Yazarın Yazdığı Yazılar ve Yazar Panelinde Listeliyoruz
             //Yazarın diğer yazıları dediğimiz blogların ındex sayfasında da aynı yapıyı kullanıyoruz.
             //var values = bm.GetBlogListByWriter(1);            
-            var userMail = User.Identity.Name;
+            var userName = User.Identity.Name;
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             var values = bm.GetListCategoryWriter(WriterID).ToPagedList(page, 5);
             return View(values);
@@ -80,13 +81,13 @@ namespace CoreBlogSystem.Controllers
         {
             //Kategorileri DropDown'a Çektiğimiz Alan            
             List<SelectListItem> categoryValues = (from x in cm.GetList()
-                                                          select new SelectListItem
-                                                          {
-                                                              Text = x.CategoryName,
-                                                              Value = x.CategoryID.ToString()
-                                                          }).ToList();
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryID.ToString()
+                                                   }).ToList();
             //Burası Yukarıde Çektiğimiz Verileri Front-End Tarafına Taşıyoruz.
-            ViewBag.Cv = categoryValues;            
+            ViewBag.Cv = categoryValues;
             return View();
         }
 
@@ -97,7 +98,8 @@ namespace CoreBlogSystem.Controllers
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(p);
 
-            var userMail = User.Identity.Name;
+            var userName = User.Identity.Name;
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
 
             if (results.IsValid)
@@ -150,11 +152,12 @@ namespace CoreBlogSystem.Controllers
         }
 
         [Route("/Blog/EditBlog/{id}")]
-        [HttpPost]        
+        [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
             //Blog Edit/Güncelleme İşlemi
-            var userMail = User.Identity.Name;
+            var userName = User.Identity.Name;
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             var values = bm.GetListCategoryWriter(WriterID);
             p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToLongDateString());

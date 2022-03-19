@@ -6,6 +6,7 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,14 +18,22 @@ using System.Threading.Tasks;
 
 namespace CoreBlogSystem.Controllers
 {
-    //Bu Controller içerisindeki action yani sayfaların hepsine yetkisiz erişimi engellemek istiyorsak
-    //[Authorize] attributesini Controller seviyesine yani en yukarıya çıkararak yapabiliriz.
-    //Böylece aşağısında kalan tüm actionlara yetkisiz erişimi engelleyeceğiz.
-    //Kullanıcı bilgileri ile giriş yapmayan kimse aşağıdaki actionlara erişemeyecek.
-    
     public class WriterController : Controller
     {
+        private readonly SignInManager<AppUser> _signInManager;
+
         WriterManager wm = new WriterManager(new EfWriterRepository());
+        AppUserManager userManager = new AppUserManager(new EfUserRepository());
+        Context context = new Context();
+
+        private readonly UserManager<AppUser> _userManager;
+
+        public WriterController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+
+        }
 
         public IActionResult Index()
         {
@@ -32,40 +41,61 @@ namespace CoreBlogSystem.Controllers
             ViewBag.v = usermail;
             return View();
         }
-        
+
         //Giriş Yapan yazarın bilgilerini güncelliyoruz. Giriş yapanın ki olacak
         [HttpGet]
-        public IActionResult WriterEditProfile()
+        public async Task<IActionResult> WriterEditProfile()
         {
-            Context c = new Context();
-            var userMail = User.Identity.Name;
-            var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
-            var writerValues = wm.TGetById(WriterID);
-            return View(writerValues);
+            var enteredUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserUpdateViewModel model = new UserUpdateViewModel();
+
+            model.MailModel = enteredUser.Email;
+            model.NameSurnameModel = enteredUser.NameSurname;
+            model.ImageURLModel = enteredUser.ImageURL;
+            model.UserNameModel = enteredUser.UserName;
+
+            //Kullanıcı ID' sini getirmek için yapılan işlem
+            //var resultsss = await _userManager.GetUserIdAsync(enteredUser);
+            //ViewBag.Veri = resultsss;
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult WriterEditProfile(Writer p)
+        public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel model)
         {
-            WriterValidator wl = new WriterValidator();
-            ValidationResult result = wl.Validate(p);
-            if (result.IsValid)
-            {
-                if (string.IsNullOrEmpty(p.WriterImage))
-                {
-                    p.WriterImage = "/CoreBlogTemplate/images/t1.jpg";
-                }
-                wm.TUpdate(p);
-                return RedirectToAction("Index", "Dashboard");
-            }
-            else
-            {
-                foreach (var item in result.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
+            var enteredUser = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            enteredUser.Email = model.MailModel;
+            enteredUser.NameSurname = model.NameSurnameModel;
+            enteredUser.ImageURL = model.ImageURLModel;
+            enteredUser.UserName = model.UserNameModel;
+            enteredUser.PasswordHash = _userManager.PasswordHasher.HashPassword(enteredUser, model.PasswordModel);
+
+            var result = await _userManager.UpdateAsync(enteredUser);
+
+            return RedirectToAction("Index", "Dashboard");
+
+            //WriterValidator wl = new WriterValidator();
+            //ValidationResult result = wl.Validate(p);
+            //if (result.IsValid)
+            //{
+            //    if (string.IsNullOrEmpty(p.WriterImage)) 
+            //    {
+            //        p.WriterImage = "/CoreBlogTemplate/images/t1.jpg";
+            //    }
+            //    p.WriterStatus = Helpers.Enums.Status.Aktif;
+            //    wm.TUpdate(p);
+            //    return RedirectToAction("Index", "Dashboard");
+            //}
+            //else
+            //{
+            //    foreach (var item in result.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
+            //return View();
         }
         //Burası Yeni Yazar Ekleme Kısmı Görseli İle
         [HttpGet]
@@ -106,6 +136,12 @@ namespace CoreBlogSystem.Controllers
         public PartialViewResult WriterFooterPartial()
         {
             return PartialView();
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
         }
     }
 }
