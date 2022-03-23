@@ -42,6 +42,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinnessLayer\BusinnessLayer.csproj" />
+    <ProjectReference Include="..\CoreBlogSystemAPI\CoreBlogSystemAPI.csproj" />
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
     <ProjectReference Include="..\EntityLAyer\EntityLayer.csproj" />
   </ItemGroup>

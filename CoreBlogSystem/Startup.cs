@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -38,7 +39,7 @@ namespace CoreBlogSystem
                 .AddErrorDescriber<IdentityMessageTR>()
                 .AddEntityFrameworkStores<Context>();
 
-            services.AddControllersWithViews();
+
 
             services.AddSession();
 
@@ -60,7 +61,9 @@ namespace CoreBlogSystem
                 {
                     x.LoginPath = "/Account/Login";
                 });
-
+            
+            services.AddControllers();
+            services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
@@ -98,7 +101,7 @@ namespace CoreBlogSystem
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            
             //Hata Sayfalarýný Kontrol Etmek Status Code' leri bize gönderiyor. 404 sayfasý için bunu kullanacaðýz
             app.UseStatusCodePagesWithReExecute("/ErrorPage/ErrorName", "?code={0}");
 

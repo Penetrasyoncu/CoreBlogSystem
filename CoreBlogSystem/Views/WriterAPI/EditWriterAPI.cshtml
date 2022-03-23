@@ -1,0 +1,17 @@
+﻿@model CoreBlogSystem.Controllers.Class1
+@{
+    ViewData["Title"] = "API İle Yazar Düzenle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>API ile Personel Güncelleme</h1>
+<form method="post">
+    <label>#ID</label>
+    @*@Html.TextBoxFor(x=>x.WriterID, new{@class = "form-control", disabled = "disabled"})*@
+    @Html.TextBoxFor(x=>x.WriterID, new{@class = "form-control"})
+    <br />
+    <label>Personel</label>
+    @Html.TextBoxFor(x=>x.WriterName, new{@class = "form-control"})
+    <br />
+    <button class="btn btn-outline-success">Güncelle</button>
+</form>

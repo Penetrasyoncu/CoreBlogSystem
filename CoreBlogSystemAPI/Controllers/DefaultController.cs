@@ -30,7 +30,7 @@ namespace CoreBlogSystemAPI.Controllers
         }
 
         //API ile ID' ye Göre Getirme
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public IActionResult WriterGet(int id)
         {
             using var dbContext = new Context();
@@ -64,7 +64,7 @@ namespace CoreBlogSystemAPI.Controllers
             }
         }
 
-        //API ile ID' ye Göre Güncelleme
+        //API ile ID' ye Göre Güncelleme        
         [HttpPut]
         public IActionResult WriterUpdate(Writer writer)
         {
