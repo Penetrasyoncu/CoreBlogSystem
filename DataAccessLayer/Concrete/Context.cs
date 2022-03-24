@@ -37,6 +37,20 @@ namespace DataAccessLayer.Concrete
                 .HasForeignKey(z => z.ReceiverID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            //Identitye bağlanması
+
+            modelBuilder.Entity<Message2>()
+                .HasOne(x => x.SenderUserIdentity)
+                .WithMany(y => y.WriterSenderIdentity)
+                .HasForeignKey(z => z.SenderID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+            modelBuilder.Entity<Message2>()
+                .HasOne(x => x.RecieverUserIdentity)
+                .WithMany(y => y.WriterReceiverIdentity)
+                .HasForeignKey(z => z.ReceiverID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+
             base.OnModelCreating(modelBuilder);
 
             //modelBuilder.Entity<Writer>().HasData(

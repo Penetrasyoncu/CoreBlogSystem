@@ -11,5 +11,10 @@ namespace EntityLayer.Concrete
     {
         public string NameSurname { get; set; }
         public string ImageURL { get; set; }
+
+        //-------------
+
+        public virtual ICollection<Message2> WriterSenderIdentity { get; set; }
+        public virtual ICollection<Message2> WriterReceiverIdentity { get; set; }
     }
 }

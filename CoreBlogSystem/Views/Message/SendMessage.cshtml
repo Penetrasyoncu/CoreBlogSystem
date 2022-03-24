@@ -1,0 +1,35 @@
+﻿@model EntityLayer.Concrete.Message2
+@{
+    ViewData["Title"] = "Mesaj Gönder";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@using (Html.BeginForm("SendMessage", "Message", FormMethod.Post))
+{
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="Subject">Konu</label>
+            @Html.TextBoxFor(x=>x.Subject, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="ReceiverID">Alıcı Seçimi</label>
+            @Html.DropDownListFor(x=>x.ReceiverID, (List<SelectListItem>)ViewBag.RecieverUser, new{@class="form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="MessageDetails">Mesajınız</label>
+            @Html.TextAreaFor(x=>x.MessageDetails, 15, 3, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-row">
+        <button type="submit" class="btn btn-info">Mesajı Gönder</button>
+    </div>
+}
+<script src="~/js/jquery-3.6.0.min.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script>
+    var Icerik = CKEDITOR.replace('MessageDetails');
+</script>

@@ -55,7 +55,7 @@ namespace CoreBlogSystem.Controllers
                     "Sayfamıza kayıt olabilmek için gizlilik sözleşmesini kabul etmeniz gerekmektedir.");
                     return View(userSignUpViewModel);
                 }
-
+                
                 var result = await _userManager.CreateAsync(user, userSignUpViewModel.Password);
                 if (result.Succeeded)
                 {

@@ -17,8 +17,17 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var c = new Context())
             {
-                //Burada Alıcısı Olduğumuz Mesajı Listelemek İçin İnclude Metodunu Kullandık
-                return c.Message2.Include(x => x.SenderUser).Where(x => x.ReceiverID == id).ToList();
+                //Burada Alıcısı Olduğumuz Mesajı Listelemek İçin İnclude Metodunu Kullandık. Yani Giriş Yaapan Gelen Mesajları Listelemek İçin
+                return c.Message2.Include(x => x.SenderUserIdentity).Where(x => x.ReceiverID == id).ToList();
+            }
+        }
+
+        public List<Message2> GetSendWithMessageByWriter(int id)
+        {
+            using (var context = new Context())
+            {
+                //Burada da Gönderisi Olduğumuz, Yani Gönderdiğimiz Mesajları Listelemek İçin Yazdık Bu Metodu
+                return context.Message2.Include(x => x.RecieverUserIdentity).Where(y => y.SenderID == id).ToList();
             }
         }
     }

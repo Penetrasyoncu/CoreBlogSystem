@@ -2,7 +2,7 @@
 @model List<Message2>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Giden Kutusu";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
@@ -21,9 +21,9 @@
             <th>@item.MessageID</th>
             <td>@Html.Raw(item.Subject)</td>
             <td>@Html.Raw((((DateTime)item.MessageDate).ToString("dd MMMM yyyy")))</td>
-            <td>@item.SenderUser.WriterName</td>
+            <td>@item.SenderUserIdentity.NameSurname</td>
             <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-warning">Mesajı Aç</a></td>
         </tr>
     }
 </table>
-<a href="#" class="btn btn-primary">Yeni Mesaj Oluştur</a>
+<a href="/Message/SendMessage" class="btn btn-primary">Yeni Mesaj Oluştur</a>

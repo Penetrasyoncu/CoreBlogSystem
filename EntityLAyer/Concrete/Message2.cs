@@ -19,5 +19,10 @@ namespace EntityLayer.Concrete
         public bool MessageStatus { get; set; }
         public Writer SenderUser { get; set; }
         public Writer RecieverUser { get; set; }
+
+        /// --------------------------
+        /// 
+        public AppUser SenderUserIdentity { get; set; }
+        public AppUser RecieverUserIdentity { get; set; }
     }
 }
