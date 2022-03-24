@@ -1,0 +1,67 @@
+﻿@model EntityLayer.Concrete.Message2
+@{
+    ViewData["Title"] = "Mesaj Detayları";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@Html.HiddenFor(x=>x.MessageID, new {@class = "form-control"})
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-content mailbox-content">
+                    <div class="file-manager">
+                        <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">Yeni Mesaj Oluştur</a>
+                        <div class="space-25"></div>
+                        <h5>Mesajlar</h5>
+                        <ul class="folder-list m-b-md" style="padding: 0">
+                            <li><a href="/Admin/AdminMessage/Inbox"> <i class="fa fa-inbox "></i> Gelen Kutusu </a></li>
+                            <li><a href="/Admin/AdminMessage/Sendbox"> <i class="fa fa-envelope-o"></i> Giden Kutusu</a></li>
+                            <li><a href="#"> <i class="fa fa-certificate"></i> Önemli</a></li>
+                            <li><a href="#"> <i class="fa fa-file-text-o"></i> Taslaklar <span class="label label-danger float-right">2</span></a></li>
+                            <li><a href="#"> <i class="fa fa-trash-o"></i> Silinenler</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <form method="get" action="#" class="float-right mail-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm" name="search" placeholder="Mesaj Ara">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                Ara
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <h2>
+                    Mesaj Detayları
+                </h2>
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <h3>
+                        <span class="font-normal">Konu: </span>@Model.Subject
+                    </h3>
+                    <h5>
+                        <span class="float-right font-normal">@Html.Raw((((DateTime)Model.MessageDate).ToString("dd MMMM yyyy")))</span>
+                    </h5>
+                </div>
+            </div>
+            <div class="mail-box">
+                <div class="mail-body">
+                    @Html.Raw(Model.MessageDetails)
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <a href="##" onClick="history.go(-1); return false;" class="btn btn-sm btn-white"> <i class="fa fa-reply"></i>Mesajlara Dön</a>
+                    <button title="" data-placement="top" data-toggle="tooltip" type="button" data-original-title="Yazdır" class="btn btn-sm btn-white"><i class="fa fa-print"></i> Yazdır</button>
+                    <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Sil" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> Sil</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

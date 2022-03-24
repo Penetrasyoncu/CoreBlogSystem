@@ -1,27 +1,24 @@
 ﻿using BusinnessLayer.Concrete;
-using CoreBlogSystem.Models;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoreBlogSystem.Controllers
+namespace CoreBlogSystem.Areas.Admin.Controllers
 {
-    public class MessageController : Controller
+    [Area("Admin")]
+    public class AdminMessageController : Controller
     {
         Context c = new Context();
         Message2Manager message2Manager = new Message2Manager(new EfMessage2Repository());
 
-        public IActionResult Index()
+        public IActionResult Inbox()
         {
             var userName = User.Identity.Name;
             var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
@@ -31,7 +28,17 @@ namespace CoreBlogSystem.Controllers
             return View(values);
         }
 
-        public IActionResult MessageDetails(int id)
+        public IActionResult Sendbox()
+        {
+            var userName = User.Identity.Name;
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+
+            var values = message2Manager.GetSendboxListByWriter(WriterID);
+            return View(values);
+        }
+
+        public IActionResult AdminMessageDetails(int id)
         {
             var value = message2Manager.TGetById(id);
             return View(value);
@@ -39,7 +46,7 @@ namespace CoreBlogSystem.Controllers
 
         //Message Gönderme Kısımları
         [HttpGet]
-        public async Task<IActionResult> SendMessage()
+        public async Task<IActionResult> AdminSendMessage()
         {
             //KUllanıcıları DropDown'a Çektiğimiz Alan            
             List<SelectListItem> recieverUsers = (from x in await GetUsersAsync()
@@ -54,7 +61,7 @@ namespace CoreBlogSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendMessage(Message2 message)
+        public IActionResult AdminSendMessage(Message2 message)
         {
             var userName = User.Identity.Name;
             var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
@@ -65,18 +72,7 @@ namespace CoreBlogSystem.Controllers
             message.MessageDate = DateTime.Now;
             message2Manager.TAdd(message);
 
-            return RedirectToAction("Index");
-        }
-
-        //Burası Giden Kutusu Olarak Düşünebiliriz
-        public IActionResult SendBox()
-        {
-            var userName = User.Identity.Name;
-            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
-            var WriterID = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
-
-            var values = message2Manager.GetSendboxListByWriter(WriterID);
-            return View(values);
+            return RedirectToAction("Sendbox");
         }
 
         //DB' den Tüm Kullanıcıları Getiren Metod
