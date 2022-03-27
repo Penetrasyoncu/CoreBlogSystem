@@ -11,14 +11,14 @@
             <div class="ibox ">
                 <div class="ibox-content mailbox-content">
                     <div class="file-manager">
-                        <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">Yeni Mesaj Oluştur</a>
+                        <a class="btn btn-block btn-primary compose-mail" href="/Admin/AdminMessage/AdminSendMessage">Yeni Mesaj Oluştur</a>
                         <div class="space-25"></div>
                         <h5>Mesajlar</h5>
                         <ul class="folder-list m-b-md" style="padding: 0">
-                            <li><a href="/Admin/AdminMessage/Inbox"> <i class="fa fa-inbox "></i> Gelen Kutusu <span class="label label-warning float-right">@Model.Count</span> </a></li>
+                            <li><a href="/Admin/AdminMessage/Inbox"> <i class="fa fa-inbox "></i> Gelen Kutusu @*<span class="label label-warning float-right">@Model.Count</span>*@ </a></li>
                             <li><a href="/Admin/AdminMessage/Sendbox"> <i class="fa fa-envelope-o"></i> Giden Kutusu</a></li>
                             <li><a href="#"> <i class="fa fa-certificate"></i> Önemli</a></li>
-                            <li><a href="#"> <i class="fa fa-file-text-o"></i> Taslaklar <span class="label label-danger float-right">2</span></a></li>
+                            <li><a href="#"> <i class="fa fa-file-text-o"></i> Taslaklar</a></li>
                             <li><a href="#"> <i class="fa fa-trash-o"></i> Silinenler</a></li>
                         </ul>
                         <div class="clearfix"></div>

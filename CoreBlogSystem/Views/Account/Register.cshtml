@@ -19,6 +19,7 @@
     <link href="~/inspinia-gh-pages/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="~/inspinia-gh-pages/css/animate.css" rel="stylesheet">
     <link href="~/inspinia-gh-pages/css/style.css" rel="stylesheet">
+    <link href="~/inspinia-gh-pages/css/toastr.min.css" rel="stylesheet">
 
 </head>
 
@@ -31,7 +32,7 @@
             </div>
             <h3>CoreBlogSystem Yazar Kayıt</h3>
             <p>Yeni Yazar Ekleyin</p>
-            <form class="m-t" role="form" asp-action="Register">
+            <form class="m-t" role="form" method="post" id="RegisterForm">
                 <div class="form-group">
                     <input type="text" asp-for="@Model.NameSurname" class="form-control" placeholder="Adınız Soyadınız">
                 </div>
@@ -61,8 +62,10 @@
 
     <!-- Mainly scripts -->
     <script src="~/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/inspinia-gh-pages/js/popper.min.js"></script>
     <script src="~/inspinia-gh-pages/js/bootstrap.js"></script>
+    <script src="~/inspinia-gh-pages/js/toastr.min.js"></script>
     <!-- iCheck -->
     <script src="~/inspinia-gh-pages/js/plugins/iCheck/icheck.min.js"></script>
     <script>
@@ -71,6 +74,34 @@
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
+        });
+    </script>
+
+    <script>
+        $("#RegisterForm").submit(function (event) {
+            var form = $('#RegisterForm')[0];
+            var data = new FormData(form);
+
+            $.ajax({
+                url: '/Account/Register',
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (result) {
+                    if (result.isSuccess) {
+                        toastr['success'](result.message, 'Başarılı');
+                        $('#RegisterForm')[0].reset();
+                    }
+                    else {
+                        toastr['error'](result.message, 'Hata');
+                    }
+                }
+            });
+            return false;
         });
     </script>
 </body>

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace BusinnessLayer.Abstract
 {
-    public interface ICommentService
+    public interface ICommentService : IGenericService<Comment>
     {
-        void CommentAdd(Comment comment);        
-        List<Comment> GetList(int id);        
+        void CommentAdd(Comment comment);
+        List<Comment> GetList(int id);
+        List<Comment> GetCommentWithBlog();
     }
 }

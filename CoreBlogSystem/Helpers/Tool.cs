@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -67,6 +68,41 @@ namespace CoreBlogSystem.Helpers
             {
                 return false;
             }
+        }
+
+        public static bool IsValidEmailRegex(string email)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(email))
+                    return false;
+
+                var addr = new MailAddress(email);
+
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\.\-]+)((\.(\w){2,50})+)$");
+                Match match = regex.Match(email);
+                if (!match.Success)
+                    return false;
+
+                if (email.nContains(new List<char> { '\'', '\"', '(', ')', ',', '!', '^', '%', '&', '/', '=', '?', '#', '$', '{', '[', ']', '}', '*', '€', '₺', '<', '>', '|', 'ğ', 'Ğ', 'ü', 'Ü', 'ş', 'Ş', 'ı', 'İ', 'ö', 'Ö', 'ç', 'Ç', 'ý' }))
+                    return false;
+
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool nContains(this string mgs, List<char> charList)
+        {
+            foreach (var item in charList)
+            {
+                if (mgs.Contains(item))
+                    return true;
+            }
+            return false;
         }
 
     }

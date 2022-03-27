@@ -16,6 +16,7 @@ using X.PagedList.Mvc.Core;
 using Microsoft.AspNetCore.Identity;
 using CoreBlogSystem.Models;
 using System.Threading.Tasks;
+using Helpers;
 
 namespace CoreBlogSystem.Controllers
 {
@@ -38,38 +39,58 @@ namespace CoreBlogSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(UserSignUpViewModel userSignUpViewModel)
+        public async Task<JsonResult> Register(UserSignUpViewModel userSignUpViewModel)
         {
-            if (ModelState.IsValid)
+            ReturnValue retVal = new ReturnValue();
+            try
             {
-                AppUser user = new AppUser()
+                if (ModelState.IsValid)
                 {
-                    Email = userSignUpViewModel.Mail,
-                    UserName = userSignUpViewModel.UserName,
-                    NameSurname = userSignUpViewModel.NameSurname
-                };
-
-                if (userSignUpViewModel.ConfirmKVKK != true)
-                {
-                    ModelState.AddModelError("ConfirmKVKK",
-                    "Sayfamıza kayıt olabilmek için gizlilik sözleşmesini kabul etmeniz gerekmektedir.");
-                    return View(userSignUpViewModel);
-                }
-                
-                var result = await _userManager.CreateAsync(user, userSignUpViewModel.Password);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Login");
-                }
-                else
-                {
-                    foreach (var item in result.Errors)
+                    if (!Tool.IsValidEmail(userSignUpViewModel.Mail))
                     {
-                        ModelState.AddModelError("", item.Description);
+                        retVal.message = "Email Formatı Hatalı";
+                        return Json(retVal);
+                    }
+
+                    AppUser user = new AppUser()
+                    {
+                        Email = userSignUpViewModel.Mail,
+                        UserName = userSignUpViewModel.UserName,
+                        NameSurname = userSignUpViewModel.NameSurname
+                    };
+
+                    if (userSignUpViewModel.ConfirmKVKK != true)
+                    {
+                        ModelState.AddModelError("ConfirmKVKK",
+                        "Sayfamıza kayıt olabilmek için gizlilik sözleşmesini kabul etmeniz gerekmektedir.");
+                        return Json(userSignUpViewModel);
+                    }
+
+                    var result = await _userManager.CreateAsync(user, userSignUpViewModel.Password);
+                    if (result.Succeeded)
+                    {
+                        //return RedirectToAction("Login", "Account");                    
+                        retVal.isSuccess = true;
+                        retVal.message = user.Email + " " + "Yazar Başarıyla Eklendi";
+
+                        return Json(retVal);
+                    }
+                    else
+                    {
+                        foreach (var item in result.Errors)
+                        {
+                            ModelState.AddModelError("", item.Description);
+                        }
                     }
                 }
             }
-            return View(userSignUpViewModel);
+            catch (Exception)
+            {
+                retVal.message = "Beklenmedik bir hata oluştu";
+                return Json(retVal);
+            }
+
+            return Json(userSignUpViewModel);
         }
 
         //---------------------LOGİN İŞLEMLERİ-------------------------
@@ -81,21 +102,38 @@ namespace CoreBlogSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UserSignInViewModel appUser)
+        public async Task<JsonResult> Login(UserSignInViewModel appUser)
         {
-            if (ModelState.IsValid)
+            ReturnValue retVal = new ReturnValue();
+            try
             {
-                var result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, true, true);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    RedirectToAction("Index", "Admin");
-                }
-                else
-                {
-                    RedirectToAction("Login", "Account");
+                    var result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, true, true);
+                    if (result.Succeeded)
+                    {
+                        retVal.isSuccess = true;
+                        retVal.message = "Giriş Başarılı";
+                        //return Json(new { data = retVal }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+                        return Json(retVal);
+                        RedirectToAction("Index", "Admin");
+                    }
+                    else
+                    {
+                        retVal.isSuccess = false;
+                        retVal.message = "Hatalı Giriş";
+                        //return Json(new { data = retVal }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+                        return Json(retVal);
+                        RedirectToAction("Login", "Account");
+                    }
                 }
             }
-            return View();
+            catch (Exception)
+            {
+                retVal.message = "Beklenmedik bir hata oluştu";
+                return Json(retVal);
+            }
+            return Json(appUser);
         }
 
         public async Task<IActionResult> LogOut()

@@ -31,6 +31,7 @@
     <link href="~/CoreBlogTemplate/css/fontawesome-all.css" rel="stylesheet">
     <link href="~/CoreBlogTemplate/css/contact.css" rel="stylesheet" type='text/css' />
     <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet">
+    <link href="~/inspinia-gh-pages/css/toastr.min.css" rel="stylesheet">
 
 </head>
 
@@ -95,7 +96,7 @@
                                     <i class="fab fa-pinterest-p"></i>
                                     <span>Pinterest</span>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -112,6 +113,8 @@
     <!---->
     <!-- js -->
     <script src="~/CoreBlogTemplate/js/jquery-2.2.3.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/inspinia-gh-pages/js/toastr.min.js"></script>
     <script src="~/CoreBlogTemplate/js/move-top.js"></script>
     <script src="~/CoreBlogTemplate/js/easing.js"></script>
     <script src="~/js/sweetalert.min.js"></script>
@@ -121,6 +124,7 @@
     <script src="~/CoreBlogTemplate/js/easing.js"></script>
     <script src="~/js/jquery.validate.min.js"></script>
     <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+
     <script>
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -357,6 +361,34 @@
                 easingType: 'easeOutQuart'
             });
 
+        });
+    </script>
+
+    <script>
+        $("#LoginForm").submit(function (event) {
+            var form = $('#LoginForm')[0];
+            var data = new FormData(form);
+
+            $.ajax({
+                url: '/Account/Login/',
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (result) {
+                    if (result.isSuccess) {
+                        toastr['success'](result.message, 'Başarılı');
+                        $('#LoginForm')[0].reset();
+                    }
+                    else {
+                        toastr['error'](result.message, 'Hata');
+                    }
+                }
+            });
+            return false;
         });
     </script>
     <a href="#home" class="scroll" id="toTop" style="display: block;">

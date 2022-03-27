@@ -66,6 +66,10 @@ namespace CoreBlogSystem
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllersWithViews().AddNewtonsoftJson();
+            services.AddRazorPages().AddNewtonsoftJson();
+
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
             services.Configure<RequestLocalizationOptions>(options =>
