@@ -51,6 +51,9 @@
                 <div class="form-group">
                     <div class="checkbox i-checks"><label> <input type="checkbox" asp-for="ConfirmKVKK"><i></i> KVKK Okudum </label></div>
                 </div>
+                <div class="form-group">
+                    <input type="file" asp-for="@Model.Image" />
+                </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Kayıt Ol</button>
 
                 <p class="text-muted text-center"><small>Zaten Bir Hesabınız Var Mı?</small></p>

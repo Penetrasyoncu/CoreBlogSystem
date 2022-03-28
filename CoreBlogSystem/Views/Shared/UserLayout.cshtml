@@ -382,6 +382,11 @@
                     if (result.isSuccess) {
                         toastr['success'](result.message, 'Başarılı');
                         $('#LoginForm')[0].reset();
+                        if (!!$("#returnUrl").val()) {
+                            location.href = $("#returnUrl").val();
+                        } else {
+                            location.href = "/";
+                        }                        
                     }
                     else {
                         toastr['error'](result.message, 'Hata');

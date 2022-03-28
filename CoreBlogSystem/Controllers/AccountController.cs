@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity;
 using CoreBlogSystem.Models;
 using System.Threading.Tasks;
 using Helpers;
+using System.IO;
 
 namespace CoreBlogSystem.Controllers
 {
@@ -46,6 +47,15 @@ namespace CoreBlogSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (userSignUpViewModel.Image != null)
+                    {
+                        var extention = Path.GetExtension(userSignUpViewModel.Image.FileName);
+                        var NewImageName = Guid.NewGuid() + extention;
+                        var Location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", NewImageName);
+                        var Stream = new FileStream(Location, FileMode.Create);
+                        userSignUpViewModel.Image.CopyTo(Stream);
+                    }
+                    
                     if (!Tool.IsValidEmail(userSignUpViewModel.Mail))
                     {
                         retVal.message = "Email Formatı Hatalı";
@@ -56,7 +66,8 @@ namespace CoreBlogSystem.Controllers
                     {
                         Email = userSignUpViewModel.Mail,
                         UserName = userSignUpViewModel.UserName,
-                        NameSurname = userSignUpViewModel.NameSurname
+                        NameSurname = userSignUpViewModel.NameSurname,
+                        ImageURL = userSignUpViewModel.Image.ToString()
                     };
 
                     if (userSignUpViewModel.ConfirmKVKK != true)
@@ -96,8 +107,9 @@ namespace CoreBlogSystem.Controllers
         //---------------------LOGİN İŞLEMLERİ-------------------------
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["returnUrl"] = returnUrl == null ? null : returnUrl;
             return View();
         }
 
@@ -114,17 +126,13 @@ namespace CoreBlogSystem.Controllers
                     {
                         retVal.isSuccess = true;
                         retVal.message = "Giriş Başarılı";
-                        //return Json(new { data = retVal }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
                         return Json(retVal);
-                        RedirectToAction("Index", "Admin");
                     }
                     else
                     {
                         retVal.isSuccess = false;
                         retVal.message = "Hatalı Giriş";
-                        //return Json(new { data = retVal }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
                         return Json(retVal);
-                        RedirectToAction("Login", "Account");
                     }
                 }
             }

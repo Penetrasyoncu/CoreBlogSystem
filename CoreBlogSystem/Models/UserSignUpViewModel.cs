@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace CoreBlogSystem.Models
 {
@@ -28,5 +29,8 @@ namespace CoreBlogSystem.Models
         [Display(Name = "KVKK Sözleşmesi")]
         [Required(ErrorMessage = "Lütfen KVKK Kutucuğunu Onaylayınız")]
         public bool ConfirmKVKK { get; set; }
+
+        [Display(Name = "Resim Seçebilirsiniz")]        
+        public IFormFile Image { get; set; }
     }
 }
