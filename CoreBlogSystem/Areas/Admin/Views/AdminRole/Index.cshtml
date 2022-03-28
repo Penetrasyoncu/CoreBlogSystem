@@ -1,0 +1,54 @@
+﻿@using EntityLayer.Concrete
+@model List<AppRole>
+
+@{
+    ViewData["Title"] = "Sistem Rolleri";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Sistem Rolleri</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>Başlık</th>
+                                <th>Sil</th>
+                                <th>Düzenle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var role in Model)
+                            {
+                                <tr>
+                                    <td>@role.Id</td>
+                                    <td>@role.Name</td>
+                                    <td><a href="" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Admin/AdminRole/EditRoleAdmin/@role.Id" class="btn btn-outline-success">Düzenle</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="/Admin/AdminRole/AddRole" class="btn btn-outline-primary">Yeni Rol Ekle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
