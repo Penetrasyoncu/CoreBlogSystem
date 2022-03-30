@@ -1,0 +1,38 @@
+﻿@model List<RoleAssignViewModel>
+
+@{
+    ViewData["Title"] = "Rol Ata";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Kullanıcı Rolleri</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-group">
+                        @for (var i = 0; i < Model.Count; i++)
+                        {
+                            <div class="form-check">
+                                <input type="hidden" asp-for="@Model[i].RoleID" />
+                                <input type="hidden" asp-for="@Model[i].RoleName" />
+                                <input type="checkbox" asp-for="@Model[i].Exist" class="form-check-input" />
+                                <label class="form-check-label" for="@Model[i].Exist">@Model[i].RoleName</label>
+                            </div>
+                        }
+                    </form>
+                    <button type="submit" class="btn btn-outline-success">Değişiklikleri Kaydet</button>
+                    <a href="/Admin/AdminRole/UserRoleList" class="btn btn-outline-primary">Kullanıcı Listesine Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,9 @@
-﻿using CoreBlogSystem.Models;
+﻿using CoreBlogSystem.Areas.Admin.Models;
+using CoreBlogSystem.Models;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,10 +13,12 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
     public class AdminRoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public AdminRoleController(RoleManager<AppRole> roleManager)
+        public AdminRoleController(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         //Rolleri Listeleme Sayfamız - Burada RoleManager Kullanarak Tüm Rolleri Listeledik.
@@ -84,6 +88,7 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
             return View(model);
         }
 
+        //Rolün Kendisini Silmek İçin Kullandığımız Metod
         public async Task<IActionResult> DeleteRole(int id)
         {
             var values = _roleManager.Roles.Where(x => x.Id == id).FirstOrDefault();
@@ -92,6 +97,42 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index");
             }
+            return View();
+        }
+
+        public IActionResult UserRoleList()
+        {
+            var roleList = _userManager.Users.ToList();
+            return View(roleList);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AssignRole(int id)
+        {
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
+            var roles = _roleManager.Roles.ToList();
+
+            TempData["UserID"] = user.Id;
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            List<RoleAssignViewModel> model = new List<RoleAssignViewModel>();
+            foreach (var item in roles)
+            {
+                RoleAssignViewModel smallModel = new RoleAssignViewModel();
+                smallModel.RoleID = item.Id;
+                smallModel.RoleName = item.Name;
+                smallModel.Exist = userRoles.Contains(item.Name);
+                model.Add(smallModel);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignRoleAsync(AppRole appRole)
+        {
+            //var userRoles = await _userManager.UpdateAsync(....);
             return View();
         }
     }
