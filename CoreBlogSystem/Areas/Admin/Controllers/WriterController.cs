@@ -23,7 +23,7 @@ using X.PagedList.Mvc.Core;
 
 namespace CoreBlogSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin")]    
     public class WriterController : Controller
     {
         WriterManager writerManager = new WriterManager(new EfWriterRepository());

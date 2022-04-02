@@ -1,6 +1,7 @@
 ﻿using CoreBlogSystem.Areas.Admin.Models;
 using CoreBlogSystem.Models;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 namespace CoreBlogSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //Aşağıdaki Roles Kısmında Yazan Admin Roles Tablosundaki Role Adı. Burası Ali,Ayşe,Ahmet,Mehmet De Olabilirdi
+    [Authorize(Roles = "Admin, Moderator")]
     public class AdminRoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
@@ -100,19 +103,21 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
             return View();
         }
 
+        //Kullanıcı Rol Listelemesini Yapmak İçin Kullandık
         public IActionResult UserRoleList()
         {
             var roleList = _userManager.Users.ToList();
             return View(roleList);
         }
 
+        //Burası ise en önemli yerlerden. Kullanıcıya Rol Ataması Yapacağımız Kısım GET/POST K
         [HttpGet]
         public async Task<IActionResult> AssignRole(int id)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
             var roles = _roleManager.Roles.ToList();
 
-            TempData["UserID"] = user.Id;
+            TempData["Userid"] = user.Id;
 
             var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -130,10 +135,23 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AssignRoleAsync(AppRole appRole)
+        public async Task<IActionResult> AssignRole(List<RoleAssignViewModel> roleAssignViewModels)
         {
-            //var userRoles = await _userManager.UpdateAsync(....);
-            return View();
+            var GetUserID = (int)TempData["Userid"];
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == GetUserID);
+
+            foreach (var item in roleAssignViewModels)
+            {
+                if (item.Exist)
+                {
+                    await _userManager.AddToRoleAsync(user, item.RoleName);
+                }
+                else
+                {
+                    await _userManager.RemoveFromRoleAsync(user, item.RoleName);
+                }
+            }
+            return RedirectToAction("UserRoleList");
         }
     }
 }

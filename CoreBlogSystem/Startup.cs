@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -61,10 +62,19 @@ namespace CoreBlogSystem
                 {
                     x.LoginPath = "/Account/Login";
                 });
-            
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(100);
+                options.AccessDeniedPath = new PathString("/Account/AccessDenied");
+                options.LoginPath = "/Account/Login";
+                options.SlidingExpiration = true;
+            });
+
             services.AddControllers();
             services.AddControllersWithViews();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();            
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
             services.Configure<RequestLocalizationOptions>(options =>
@@ -100,7 +110,7 @@ namespace CoreBlogSystem
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             //Hata Sayfalarýný Kontrol Etmek Status Code' leri bize gönderiyor. 404 sayfasý için bunu kullanacaðýz
             app.UseStatusCodePagesWithReExecute("/ErrorPage/ErrorName", "?code={0}");
 

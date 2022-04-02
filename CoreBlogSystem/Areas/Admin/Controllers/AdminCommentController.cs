@@ -1,13 +1,14 @@
 ﻿using BusinnessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 using X.PagedList.Mvc.Core;
 
 namespace CoreBlogSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin")]    
     public class AdminCommentController : Controller
     {
         CommentManager commentManager = new CommentManager(new EfCommentRepository());

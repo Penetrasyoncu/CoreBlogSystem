@@ -1,11 +1,12 @@
 ﻿using CoreBlogSystem.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
 namespace CoreBlogSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin")]    
     public class ChartController : Controller
     {
         public IActionResult Index()

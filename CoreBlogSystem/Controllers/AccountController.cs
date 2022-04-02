@@ -55,7 +55,7 @@ namespace CoreBlogSystem.Controllers
                         var Stream = new FileStream(Location, FileMode.Create);
                         userSignUpViewModel.Image.CopyTo(Stream);
                     }
-                    
+
                     if (!Tool.IsValidEmail(userSignUpViewModel.Mail))
                     {
                         retVal.message = "Email Formatı Hatalı";
@@ -144,10 +144,16 @@ namespace CoreBlogSystem.Controllers
             return Json(appUser);
         }
 
+        //Çıkış Yapacağımız Kısım
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

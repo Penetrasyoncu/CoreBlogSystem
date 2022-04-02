@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace CoreBlogSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin")]    
     public class WidgetController : Controller
     {
         public IActionResult Index()

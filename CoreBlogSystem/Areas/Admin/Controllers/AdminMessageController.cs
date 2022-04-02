@@ -2,6 +2,7 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CoreBlogSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin")]    
     public class AdminMessageController : Controller
     {
         Context c = new Context();

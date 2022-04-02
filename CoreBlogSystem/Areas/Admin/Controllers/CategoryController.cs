@@ -23,7 +23,7 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
 {
     //Area Attribute nu kullanmamızın sebebi; bu controller' ın nerden geldiğini söylemek zorunda olduğumuzdan
     //Yani uygulamanın kafasının karışmaması lazım CategoryController Vitrin kısmında da aynı isimde var karışmasın diye bunu yazdık.
-    [Area("Admin")]
+    [Area("Admin")]    
 
     public class CategoryController : Controller
     {

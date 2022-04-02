@@ -1,11 +1,12 @@
 ﻿using BusinnessLayer.Concrete;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreBlogSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin")]    
     public class AdminBlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
