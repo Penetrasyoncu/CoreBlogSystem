@@ -49,9 +49,12 @@
             <li>
                 <a href="#"><i class="fa fa-info"></i> <span class="nav-label">Ayarlar</span></a>
             </li>
-            <li>
-                <a href="/Admin/AdminRole/Index"><i class="fa fa-info"></i> <span class="nav-label">Sistem Rolleri</span></a>
-            </li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li>
+                    <a href="/Admin/AdminRole/Index"><i class="fa fa-info"></i> <span class="nav-label">Sistem Rolleri</span></a>
+                </li>
+            }
             <li>
                 <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Bildirimler</span></a>
             </li>

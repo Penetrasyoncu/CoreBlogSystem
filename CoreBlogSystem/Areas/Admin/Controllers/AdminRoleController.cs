@@ -12,7 +12,7 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //Aşağıdaki Roles Kısmında Yazan Admin Roles Tablosundaki Role Adı. Burası Ali,Ayşe,Ahmet,Mehmet De Olabilirdi
-    [Authorize(Roles = "Admin, Moderator")]
+    [Authorize(Roles = "Admin")]
     public class AdminRoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;

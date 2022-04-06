@@ -40,8 +40,6 @@ namespace CoreBlogSystem
                 .AddErrorDescriber<IdentityMessageTR>()
                 .AddEntityFrameworkStores<Context>();
 
-
-
             services.AddSession();
 
             //Authorize Ýþlemlerini Proje Seviyesinde Yazmak Ýçin Burayý Kullanacaðýz.            
@@ -65,11 +63,11 @@ namespace CoreBlogSystem
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(100);
+                //options.Cookie.HttpOnly = true;
+                //options.ExpireTimeSpan = TimeSpan.FromMinutes(100);
                 options.AccessDeniedPath = new PathString("/Account/AccessDenied");
                 options.LoginPath = "/Account/Login";
-                options.SlidingExpiration = true;
+                //options.SlidingExpiration = true;
             });
 
             services.AddControllers();
@@ -118,9 +116,11 @@ namespace CoreBlogSystem
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCookiePolicy();
 
-            app.UseAuthorization();
+            //Aþaðýdaki sýralama ters olursa eðer hata alýnýr çalýþmaz :-)
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
