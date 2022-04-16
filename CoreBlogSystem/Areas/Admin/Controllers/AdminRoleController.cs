@@ -64,7 +64,6 @@ namespace CoreBlogSystem.Areas.Admin.Controllers
             return View(roleViewModel);
         }
 
-
         //Burası İse Rolün Kendi Bilgileriini Güncellemek İçin Yazdığımız Action
         [HttpGet]
         public IActionResult UpdateRole(int id)
