@@ -67,13 +67,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GetBlogService.asmx" />
+    <Content Include="GetDataService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blogs.cs" />
-    <Compile Include="GetBlogService.asmx.cs">
-      <DependentUpon>GetBlogService.asmx</DependentUpon>
+    <Compile Include="Categories.cs" />
+    <Compile Include="GetDataService.asmx.cs">
+      <DependentUpon>GetDataService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

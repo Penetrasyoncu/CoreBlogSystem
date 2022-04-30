@@ -1,0 +1,8 @@
+CREATE PROCEDURE SP_GETCATEGORIES
+(
+	@CategoryIDParam int
+)
+AS
+BEGIN
+SELECT * FROM Categories WHERE CategoryID = @CategoryIDParam
+END
