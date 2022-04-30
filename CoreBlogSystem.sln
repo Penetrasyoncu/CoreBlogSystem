@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinnessLayer", "Businness
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreBlogSystemAPI", "CoreBlogSystemAPI\CoreBlogSystemAPI.csproj", "{0ED73C7D-C3E1-42F7-B0AC-1E7DBD294EF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT_Core_Blog_System", "JWT_Core_Blog_System\JWT_Core_Blog_System.csproj", "{E41F788B-9A87-46A9-8385-0C167DD33056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWT_Core_Blog_System", "JWT_Core_Blog_System\JWT_Core_Blog_System.csproj", "{E41F788B-9A87-46A9-8385-0C167DD33056}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebServices", "WebServices", "{2C797516-9EAB-4418-9B44-7EB6FC7A4B04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetUserWebService", "GetUserWebService\GetUserWebService.csproj", "{AF09E3BC-96DE-4047-9BB4-F4E07341CC94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +49,16 @@ Global
 		{E41F788B-9A87-46A9-8385-0C167DD33056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E41F788B-9A87-46A9-8385-0C167DD33056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E41F788B-9A87-46A9-8385-0C167DD33056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF09E3BC-96DE-4047-9BB4-F4E07341CC94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF09E3BC-96DE-4047-9BB4-F4E07341CC94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF09E3BC-96DE-4047-9BB4-F4E07341CC94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF09E3BC-96DE-4047-9BB4-F4E07341CC94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AF09E3BC-96DE-4047-9BB4-F4E07341CC94} = {2C797516-9EAB-4418-9B44-7EB6FC7A4B04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {67B26A4B-F54E-433E-A542-5E1A3C5FCC3B}
